@@ -120,6 +120,12 @@
     wayland.enable = true;
     theme = "breeze";
 
+    settings = {
+      Theme = {
+        Background = "/etc/nixos/asset/sinsry/diabloIII.png";
+      };
+    };
+
   };
 
   # Bluetooth
