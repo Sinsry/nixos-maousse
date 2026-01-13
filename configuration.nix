@@ -120,13 +120,8 @@
     wayland.enable = true;
     theme = "breeze";
 
-    settings = {
-      Theme = {
-        Background = "/etc/nixos/asset/sinsry/diabloIII.png";
-      };
-    };
 
-  };
+    };
 
   # Bluetooth
   hardware.bluetooth = {
@@ -206,7 +201,15 @@
     gamescope
     papirus-icon-theme
     plasma-panel-colorizer
-  ];
+
+    (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+    [General]
+    background=/etc/nixos/asset/sinsry/diabloIII.png
+  '')
+
+    ];
+
+
 
   programs.firefox = { # Navigateur interne + config fr
     enable = true;
