@@ -120,16 +120,6 @@
     wayland.enable = true;
     theme = "breeze";
 
-    settings = {
-      Theme = {
-        Current = "breeze";
-        IconTheme = "Papirus-Dark";
-      };
-      General = {
-      background = "/etc/nixos/asset/sinsry/diabloIII.png";
-    };
-
-    };
   };
 
   # Bluetooth
@@ -210,7 +200,6 @@
     gamescope
     papirus-icon-theme
     plasma-panel-colorizer
-    kdePackages.sddm
   ];
 
   programs.firefox = { # Navigateur interne + config fr
