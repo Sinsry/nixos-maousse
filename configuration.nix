@@ -120,6 +120,10 @@
     wayland.enable = true;
     theme = "breeze-papirus";
 
+    extraPackages = with pkgs; [
+    papirus-icon-theme
+  ];
+
     };
 
   # Bluetooth

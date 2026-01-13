@@ -24,6 +24,7 @@ Item {
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     Kirigami.Theme.inherit: false
+    Kirigami.Theme.iconTheme: "Papirus-Dark"
 
     width: 1600
     height: 900
