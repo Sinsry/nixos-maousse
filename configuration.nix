@@ -256,7 +256,7 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [ "nix-command" ];
       auto-optimise-store = true;
       download-buffer-size = 1073741824;
       max-jobs = "auto";
