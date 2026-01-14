@@ -259,7 +259,7 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" ];
+      experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
       download-buffer-size = 1073741824;
       max-jobs = "auto";
@@ -293,7 +293,7 @@
 
   environment.shellAliases = {
     rebuild = ''
-      sudo nixos-rebuild switch path:/etc/nixos#maousse
+      sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
     '';
     nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
   };
