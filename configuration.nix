@@ -188,7 +188,7 @@
 
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
-      background=/etc/nixos/asset/sinsry/wallpaper-sddm.png.png
+      background=/etc/nixos/asset/maousse/wallpaper-sddm.png.png
      '')
     (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
       [Icons]
@@ -297,7 +297,7 @@
     nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
   };
 
-  environment.etc."libinput/local-overrides.quirks".source = ./asset/sinsry/local-overrides.quirks;
+  environment.etc."libinput/local-overrides.quirks".source = ./asset/maousse/local-overrides.quirks;
 
   environment.etc."inputrc".text = ''
     set completion-ignore-case on

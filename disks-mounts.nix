@@ -39,7 +39,7 @@
   };
 
   # Configuration des montages internes dans /mnt/
-  fileSystems."/mnt/DataWindows" = {
+  fileSystems."/mnt/Data_Windows" = {
     device = "/dev/disk/by-uuid/363A21FE3A21BBAD";
     fsType = "ntfs";
     options = [
@@ -61,7 +61,7 @@
   systemd.tmpfiles.rules = [
     "d /mnt/Ventoy 0755 root root -"
     "d /mnt/Windows 0755 root root -"
-    "d /mnt/DataWindows 0755 root root -"
+    "d /mnt/Data_Windows 0755 root root -"
     "d /home/sinsry/Jeux 0755 root root -"
     ];
 }
