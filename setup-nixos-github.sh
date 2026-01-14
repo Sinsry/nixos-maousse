@@ -18,7 +18,6 @@ sudo mount "${DISK}p1" /mnt/boot
 
 # 2. Renommage et Labels
 echo "Configuration des labels (NixOS)..."
-sudo parted /dev/nvme0n1 name 2 NixOS || true
 sudo btrfs filesystem label /mnt NixOS
 
 # 3. Génération du Hardware local
