@@ -69,7 +69,7 @@ sudo chmod 600 /mnt/home/sinsry/.ssh/id_ed25519
 echo "Mise à jour du lockfile vers les derniers commits Unstable..."
 cd /mnt/etc/nixos
 # Cette étape garantit que tu télécharges les versions les plus récentes d'aujourd'hui
-sudo nix flake update
+sudo nix flake update --extra-experimental-features "nix-command flakes"
 
 # 7. Installation finale
 echo "Lancement de nixos-install (Cible : maousse)..."
