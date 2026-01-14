@@ -189,7 +189,7 @@
 
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
-      background=/etc/nixos/asset/maousse/wallpaper-sddm.png.png
+      background=/etc/nixos/asset/maousse/wallpaper-sddm.png
      '')
     (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
       [Icons]
