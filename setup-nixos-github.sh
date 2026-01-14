@@ -44,8 +44,26 @@ cp /tmp/nixos-maousse/network-mounts.nix /mnt/etc/nixos/
 
 # Copie récursive du dossier d'assets (s'il y a des images/clés/scripts dedans)
 if [ -d "/tmp/nixos-maousse/asset/maousse" ]; then
-    cp -r /tmp/nixos-maousse/asset/naousse/* /mnt/etc/nixos/asset/maousse/
+    cp -r /tmp/nixos-maousse/asset/maousse/* /mnt/etc/nixos/asset/maousse/
 fi
+
+# 5.5 Configuration SSH (Nouveau : pour garder l'accès GitHub après reboot)
+echo "Configuration SSH..."
+ssh-keygen -t ed25519 -C "Sinsry@users.noreply.github.com" -f ~/.ssh/id_ed25519 -N ""
+echo ""
+echo "=== 🔑 Clé publique SSH (à copier sur GitHub) ==="
+echo ""
+cat ~/.ssh/id_ed25519.pub
+echo ""
+echo "https://github.com/settings/ssh/new"
+echo "==============================================="
+read -p "Appuie sur Entrée quand c'est fait..."
+
+# Sauvegarde des clés sur le disque dur
+sudo mkdir -p /mnt/home/sinsry/.ssh
+sudo cp ~/.ssh/id_ed25519* /mnt/home/sinsry/.ssh/
+sudo chown -R 1000:100 /mnt/home/sinsry/.ssh
+sudo chmod 600 /mnt/home/sinsry/.ssh/id_ed25519
 
 # 6. Forcer l'Unstable (Mise à jour du lock)
 echo "Mise à jour du lockfile vers les derniers commits Unstable..."
