@@ -1,89 +1,62 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p git parted btrfs-progs
 
-echo "=== Configuration post-installation NixOS ==="
-echo ""
-echo "⚠️  Lance ce script APRÈS l'installation graphique, AVANT de redémarrer !"
-echo ""
-read -p "L'installation graphique est terminée ? (y/n) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Lance d'abord l'installeur graphique !"
-    exit 1
+set -e # Arrête le script en cas d'erreur
+
+echo "=== 🚀 Installation Directe NixOS Maousse (Unstable) ==="
+
+# 1. Montage des partitions
+# On part du principe que p1 = EFI et p2 = Root (Btrfs)
+echo "Montage des partitions sur /mnt..."
+sudo mount /dev/nvme0n1p2 /mnt
+sudo mkdir -p /mnt/boot
+sudo mount /dev/nvme0n1p1 /mnt/boot
+
+# 2. Renommage et Labels
+echo "Configuration des labels (NixOS)..."
+sudo parted /dev/nvme0n1 name 2 NixOS || true
+sudo btrfs filesystem label /mnt NixOS
+
+# 3. Génération du Hardware local
+echo "Génération du hardware-configuration.nix..."
+sudo mkdir -p /mnt/etc/nixos/asset/sinsry
+# On génère le hardware spécifique à la machine actuelle
+sudo nixos-generate-config --root /mnt
+
+# 4. Récupération de ta config GitHub
+echo "Clonage de la configuration depuis GitHub..."
+rm -rf /tmp/nixos-maousse
+git clone https://github.com/Sinsry/nixos-maousse /tmp/nixos-maousse
+
+# 5. Fusion de la configuration (Méthode propre)
+echo "Installation des fichiers de configuration..."
+
+# Copie des fichiers racines du repo
+cp /tmp/nixos-maousse/flake.nix /mnt/etc/nixos/
+cp /tmp/nixos-maousse/flake.lock /mnt/etc/nixos/
+cp /tmp/nixos-maousse/configuration.nix /mnt/etc/nixos/
+cp /tmp/nixos-maousse/disks-mounts.nix /mnt/etc/nixos/
+cp /tmp/nixos-maousse/network-mounts.nix /mnt/etc/nixos/
+
+# Copie récursive du dossier d'assets (s'il y a des images/clés/scripts dedans)
+if [ -d "/tmp/nixos-maousse/asset/sinsry" ]; then
+    cp -r /tmp/nixos-maousse/asset/sinsry/* /mnt/etc/nixos/asset/sinsry/
 fi
 
-# 1. Sauvegarde le hardware-configuration.nix généré par l'installeur
-echo "Sauvegarde du hardware-configuration.nix..."
-sudo cp /etc/nixos/hardware-configuration.nix /tmp/hardware-configuration.nix.backup
+# 6. Forcer l'Unstable (Mise à jour du lock)
+echo "Mise à jour du lockfile vers les derniers commits Unstable..."
+cd /mnt/etc/nixos
+# Cette étape garantit que tu télécharges les versions les plus récentes d'aujourd'hui
+sudo nix flake update
 
-# 2. Sauvegarde complète (au cas où)
-echo "Sauvegarde de la config générée..."
-sudo cp -r /etc/nixos /etc/nixos.backup
-
-# 3. Vide le contenu de /etc/nixos
-echo "Suppression de la config générée..."
-sudo rm -rf /etc/nixos/*
-sudo rm -rf /etc/nixos/.git* 2>/dev/null || true
-
-# 4. Clone ta vraie config
-echo "Clonage de ta configuration depuis GitHub..."
-sudo git clone https://github.com/Sinsry/nixos-maousse /etc/nixos
-
-# 5. Restaure le hardware-configuration.nix de cette machine
-echo "Restauration du hardware-configuration.nix de cette machine..."
-sudo cp /tmp/hardware-configuration.nix.backup /etc/nixos/hardware-configuration.nix
-
-# 5.5 Renomme la partition système
-echo "Renommage de la partition système..."
-sudo parted /dev/nvme0n1 name 2 NixOS
-sudo btrfs filesystem label / NixOS
-
-# 6. Configure SSH
-echo ""
-echo "Configuration SSH..."
-ssh-keygen -t ed25519 -C "Sinsry@users.noreply.github.com" -f ~/.ssh/id_ed25519 -N ""
+# 7. Installation finale
+echo "Lancement de nixos-install (Cible : maousse)..."
+# --no-channel-copy : on ne veut que du Flake, pas de vieux channels
+sudo nixos-install --flake .#maousse --no-channel-copy
 
 echo ""
-echo "=== 🔑 Clé publique SSH (à copier) ==="
-echo ""
-cat ~/.ssh/id_ed25519.pub
-echo ""
-echo "=================================="
-echo ""
-echo "1. Va sur https://github.com/settings/ssh/new"
-echo "2. Colle la clé ci-dessus"
-echo "3. Titre : 'NixOS $(date +%Y-%m-%d)'"
-echo "4. Clique sur 'Add SSH key'"
-echo ""
-while true; do
-    IFS= read -r -n 1 -s -p "Appuie sur Entrée quand c'est fait..." key
-    if [[ -z $key ]]; then
-        echo ""
-        break
-    else
-        echo ""
-        echo "❌ Appuie sur ENTRÉE uniquement !"
-    fi
-done
-
-# 7. Copie SSH pour root
-echo ""
-echo "Configuration SSH pour root..."
-sudo mkdir -p /root/.ssh
-sudo cp ~/.ssh/id_ed25519* /root/.ssh/
-sudo chmod 600 /root/.ssh/id_ed25519
-sudo chmod 644 /root/.ssh/id_ed25519.pub
-
-# 8. Change vers SSH
-cd /etc/nixos
-sudo git remote set-url origin git@github.com:Sinsry/nixos-maousse.git
-
-# 9. Rebuild avec ta vraie config
-echo ""
-echo "Rebuild du système avec ta configuration..."
-sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
-
-echo ""
-echo "✅ Configuration terminée !"
-echo ""
-echo "Tu peux maintenant redémarrer pour profiter de ton système complet ! 🎉"
+echo "===================================================="
+echo "✅ Installation terminée avec succès !"
+echo "⚠️  N'oublie pas d'enlever la clé USB après le reboot."
+echo "===================================================="
+echo "Tu peux maintenant taper : reboot"
