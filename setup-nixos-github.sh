@@ -29,22 +29,22 @@ sudo nixos-generate-config --root /mnt
 
 # 4. Récupération de ta config GitHub
 echo "Clonage de la configuration depuis GitHub..."
-rm -rf /tmp/nixos-maousse
+sudo rm -rf /tmp/nixos-maousse
 git clone https://github.com/Sinsry/nixos-maousse /tmp/nixos-maousse
 
 # 5. Fusion de la configuration (Méthode propre)
 echo "Installation des fichiers de configuration..."
 
 # Copie des fichiers racines du repo
-cp /tmp/nixos-maousse/flake.nix /mnt/etc/nixos/
-cp /tmp/nixos-maousse/flake.lock /mnt/etc/nixos/
-cp /tmp/nixos-maousse/configuration.nix /mnt/etc/nixos/
-cp /tmp/nixos-maousse/disks-mounts.nix /mnt/etc/nixos/
-cp /tmp/nixos-maousse/network-mounts.nix /mnt/etc/nixos/
+sudo cp /tmp/nixos-maousse/flake.nix /mnt/etc/nixos/
+sudo cp /tmp/nixos-maousse/flake.lock /mnt/etc/nixos/
+sudo cp /tmp/nixos-maousse/configuration.nix /mnt/etc/nixos/
+sudo cp /tmp/nixos-maousse/disks-mounts.nix /mnt/etc/nixos/
+sudo cp /tmp/nixos-maousse/network-mounts.nix /mnt/etc/nixos/
 
 # Copie récursive du dossier d'assets (s'il y a des images/clés/scripts dedans)
 if [ -d "/tmp/nixos-maousse/asset/maousse" ]; then
-    cp -r /tmp/nixos-maousse/asset/maousse/* /mnt/etc/nixos/asset/maousse/
+    sudo cp -r /tmp/nixos-maousse/asset/maousse/* /mnt/etc/nixos/asset/maousse/
 fi
 
 # 5.5 Configuration SSH (Nouveau : pour garder l'accès GitHub après reboot)
