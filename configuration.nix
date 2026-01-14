@@ -290,7 +290,7 @@
 
   environment.shellAliases = {
     rebuild = ''
-      sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
+      sudo nixos-rebuild switch path:/etc/nixos#maousse
     '';
     nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
   };
