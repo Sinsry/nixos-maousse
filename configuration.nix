@@ -213,6 +213,7 @@
     plasma-panel-colorizer
     kdePackages.filelight
     wowup-cf
+    fastfetch
 
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
