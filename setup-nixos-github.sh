@@ -55,7 +55,16 @@ echo "2. Colle la clé ci-dessus"
 echo "3. Titre : 'NixOS $(date +%Y-%m-%d)'"
 echo "4. Clique sur 'Add SSH key'"
 echo ""
-read -p "Appuie sur Entrée quand c'est fait..."
+while true; do
+    read -n 1 -s -p "Appuie sur Entrée quand c'est fait..." key
+    if [[ $key == "" ]]; then
+        echo ""
+        break
+    else
+        echo ""
+        echo "❌ Appuie sur ENTRÉE !"
+    fi
+done
 
 # 7. Copie SSH pour root
 echo ""
