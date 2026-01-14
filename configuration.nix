@@ -295,7 +295,7 @@
     nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
   };
 
-  environment.etc."libinput/local-overrides.quirks".source = /nixos/asset/sinsry/local-overrides.quirks;
+  environment.etc."libinput/local-overrides.quirks".source = /etc/nixos/asset/sinsry/local-overrides.quirks;
 
   environment.etc."inputrc".text = ''
     set completion-ignore-case on
