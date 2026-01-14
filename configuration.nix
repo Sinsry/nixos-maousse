@@ -173,14 +173,12 @@
     isNormalUser = true;
     description = "Sinsry";
     extraGroups = [ "networkmanager" "wheel" ]; # Wheel permet d'utiliser sudo.
-    packages = with pkgs; [ 
-      kdePackages.kate 
-    ];
   };
 
   # Utilitaires système installés en natif.
   environment.systemPackages = with pkgs; [
     nvd
+    rar
     libnotify
     google-chrome
     meld
@@ -190,8 +188,6 @@
     nil
     nixfmt
     psmisc
-    kdePackages.breeze-gtk
-    kdePackages.partitionmanager
     git
     discord
     heroic
@@ -204,13 +200,20 @@
     gamescope
     papirus-icon-theme
     plasma-panel-colorizer
-    kdePackages.filelight
     wowup-cf
     fastfetch
+    kdePackages.kate
+    kdePackages.breeze-gtk
+    kdePackages.partitionmanager
+    kdePackages.filelight
 
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
       background=/etc/nixos/asset/sinsry/diabloIII.png
+
+      [Theme]
+      Current=breeze-dark
+
     '')
 
     (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
