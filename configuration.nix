@@ -178,6 +178,13 @@
     ];
   };
 
+  services.libinput = {
+  enable = true;
+  mouse = {
+    accelProfile = "flat";  # Pas d'accélération
+  };
+};
+
   # Utilitaires système installés en natif.
   environment.systemPackages = with pkgs; [
     nvd                       # Pour comparer les versions de NixOS
@@ -216,8 +223,6 @@
     '')
 
  ];
-
-
 
   programs.firefox = { # Navigateur interne + config fr
     enable = true;

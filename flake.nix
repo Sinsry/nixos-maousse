@@ -27,6 +27,7 @@
             imports = [ plasma-manager.homeModules.plasma-manager ];
 
             home.stateVersion = "25.11";
+            home.file.".face.icon".source = ./asset/sinsry/Gruul.png;
 
             programs.plasma = {
               enable = true;
@@ -37,6 +38,7 @@
                 theme = "breeze-dark";
                 iconTheme = "Papirus-Dark";
                 cursor.theme = "breeze_cursors";
+                wallpaper = "/etc/nixos/asset/sinsry/diabloIII.png";
               };
               # Désactiver le retour de lancement
               configFile = {
