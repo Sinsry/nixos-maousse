@@ -7,7 +7,7 @@ echo "=== 🚀 Installation Directe NixOS Maousse (Unstable) ==="
 
 # --- CONFIGURATION DES DISQUES ---
 # Remplace nvme0n1 par ton disque si nécessaire (vérifie avec lsblk)
-DISK="/dev/nvme0n1"
+DISK="/dev/nvme1n1"
 
 # 1. Montage des partitions
 # On part du principe que p1 = EFI et p2 = Root (Btrfs)
