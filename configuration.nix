@@ -179,13 +179,12 @@
     papirus-icon-theme
     wowup-cf
     fastfetch
-    bup
     rsync
+    pika-backup
     kdePackages.kate
     kdePackages.breeze-gtk
     kdePackages.partitionmanager
     kdePackages.filelight
-    kdePackages.kup
 
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
