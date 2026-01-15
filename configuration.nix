@@ -181,6 +181,7 @@
     fastfetch
     rsync
     bup
+    protonvpn-gui
     kdePackages.kup
     kdePackages.kate
     kdePackages.breeze-gtk
