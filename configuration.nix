@@ -23,11 +23,20 @@
       "udev.log_priority=3"
     ];
 
+    supportedFilesystems = [
+      "ntfs"
+      "exfat"
+      "vfat"
+      "ext4"
+      "btrfs"
+    ];
+
     loader = {
       systemd-boot = {
         enable = true;
         consoleMode = "max";
       };
+
       efi.canTouchEfiVariables = true;
     };
 
@@ -155,6 +164,8 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
+    ntfs3g
+    exfatprogs
     nvd
     rar
     libnotify

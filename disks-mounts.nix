@@ -1,21 +1,7 @@
-{ _config, pkgs, ... }:
+{ _config, _pkgs, ... }:
 {
-  # Support des systèmes de fichiers
-  boot.supportedFilesystems = [
-    "ntfs"
-    "exfat"
-    "vfat"
-    "ext4"
-    "btrfs"
-  ];
 
-  # Packages nécessaires
-  environment.systemPackages = with pkgs; [
-    ntfs3g
-    exfatprogs
-  ];
-
-  # Configuration des montages internes dans /mnt/
+ # Configuration des montages internes dans /mnt/
   fileSystems."/mnt/Ventoy" = {
     device = "/dev/disk/by-uuid/4E21-0000";
     fsType = "exfat";
@@ -35,7 +21,7 @@
     options = [
       "nofail"
       "noperm"
-      ];
+    ];
   };
 
   # Configuration des montages internes dans /mnt/
@@ -54,7 +40,7 @@
     fsType = "ext4";
     options = [
       "nofail"
-      ];
+    ];
   };
 
   # Crée les points de montage
@@ -63,5 +49,5 @@
     "d /mnt/Windows 0755 root root -"
     "d /mnt/Data_Windows 0755 root root -"
     "d /home/sinsry/Jeux 0755 root root -"
-    ];
+  ];
 }

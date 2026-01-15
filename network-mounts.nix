@@ -20,7 +20,6 @@
       "retrans=2"
       "nolock"
       "soft"
-      "intr"
     ];
   };
 
@@ -36,10 +35,6 @@
       "retrans=2"
       "nolock"
       "soft"
-      "intr"
     ];
   };
-
-  # Services NFS nécessaires
-  services.rpcbind.enable = true;
 }
