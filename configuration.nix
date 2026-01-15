@@ -180,7 +180,6 @@
     wowup-cf
     fastfetch
     rsync
-    pika-backup
     kdePackages.kate
     kdePackages.breeze-gtk
     kdePackages.partitionmanager
