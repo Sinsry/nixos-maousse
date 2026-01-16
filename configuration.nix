@@ -300,7 +300,7 @@
     GTK_THEME = "Breeze-Dark";
   };
 
-  services.dbus.packages = with pkgs; [ kdePackages.kup ];
+  services.dbus.packages =  [ pkgs.kdePackages.kup ];
 
   systemd.user.services.kup = {
   path = [ pkgs.bup pkgs.kdePackages.kup ];
