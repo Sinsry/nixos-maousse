@@ -198,6 +198,7 @@
     rsync
     vorta
     protonvpn-gui
+    kdePackages.kdesu
     kdePackages.kate
     kdePackages.breeze-gtk
     kdePackages.partitionmanager
