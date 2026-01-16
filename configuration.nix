@@ -303,6 +303,10 @@
 
   services.dbus.packages = with pkgs; [ kup ];
 
+  systemd.user.services.kup = {
+  path = [ pkgs.bup ];
+};
+
   environment.shellAliases = {
     rebuild = ''
       sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
