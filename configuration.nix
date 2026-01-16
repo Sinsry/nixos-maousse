@@ -192,8 +192,9 @@
     fastfetch
     rsync
     bup
+    kup
     protonvpn-gui
-    kdePackages.kup
+    #kdePackages.kup
     kdePackages.kate
     kdePackages.breeze-gtk
     kdePackages.partitionmanager
