@@ -191,6 +191,7 @@
     wowup-cf
     fastfetch
     rsync
+    vorta
     protonvpn-gui
     kdePackages.kate
     kdePackages.breeze-gtk
