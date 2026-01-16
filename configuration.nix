@@ -191,9 +191,7 @@
     wowup-cf
     fastfetch
     rsync
-    bup
     protonvpn-gui
-    kdePackages.kup
     kdePackages.kate
     kdePackages.breeze-gtk
     kdePackages.partitionmanager
@@ -300,11 +298,6 @@
     GTK_THEME = "Breeze-Dark";
   };
 
-  services.dbus.packages =  [ pkgs.kdePackages.kup ];
-
-  systemd.user.services.kup = {
-  path = [ pkgs.bup pkgs.kdePackages.kup ];
-};
 
   environment.shellAliases = {
     rebuild = ''
