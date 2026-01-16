@@ -215,7 +215,19 @@
     preferences = {
       "intl.locale.requested" = "fr";
     };
+    nativeMessagingHosts = [ pkgs.plasma-browser-integration ];
   };
+
+
+
+  programs.chromium = {
+  enable = true;
+  extraOpts = {
+    "NativeMessagingHosts" = {
+      "org.kde.plasma.browser_integration" = "${pkgs.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+    };
+  };
+};
 
   programs.git = {
     enable = true;
