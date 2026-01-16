@@ -31,7 +31,10 @@ sudo git clone https://github.com/Sinsry/nixos-maousse /etc/nixos
 
 # 5. Restaure le hardware-configuration.nix de cette machine
 echo "Restauration du hardware-configuration.nix de cette machine..."
-sudo cp /tmp/hardware-configuration.nix.backup /etc/nixos/hardware-configuration.nix
+sudo cp /tmp/hardware-configuration.nix.backup /etc/nixos/hardware-configuration-local.nix
+
+# 5b. Le hardware-configuration.nix du repo est déjà le wrapper, on ne touche pas
+echo "Le wrapper hardware-configuration.nix est déjà en place"
 
 # 6. Configure SSH
 echo ""
