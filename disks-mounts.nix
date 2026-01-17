@@ -16,7 +16,7 @@
 
   # Configuration des montages internes dans /mnt/
   fileSystems."/mnt/Windows" = {
-    device = "/dev/disk/by-uuid/5A0820A008207D5F";
+    device = "/dev/disk/by-uuid/90B4C5E3B4C5CBC2";
     fsType = "ntfs";
     options = [
       "nofail"
@@ -26,7 +26,7 @@
 
   # Configuration des montages internes dans /mnt/
   fileSystems."/mnt/Data_Windows" = {
-    device = "/dev/disk/by-uuid/363A21FE3A21BBAD";
+    device = "/dev/disk/by-uuid/D8CA1469CA1445E2";
     fsType = "ntfs";
     options = [
       "nofail"
