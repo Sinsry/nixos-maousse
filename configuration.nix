@@ -122,6 +122,7 @@
     package = pkgs.steam.override {
       extraEnv = {
         STEAM_FORCE_DESKTOPUI_SCALING = "1";
+        XDG_SESSION_TYPE = "wayland";
       };
       extraArgs = "-language french";
     };
