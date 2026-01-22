@@ -110,6 +110,14 @@
   services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
 
+  security.wrappers.bwrap = {
+    setuid = true;
+    owner = "root";
+    group = "root";
+    source = "${pkgs.bubblewrap}/bin/bwrap";
+    capabilities = "cap_sys_admin,cap_net_admin+ep";
+  };
+
   programs.gamescope = {
     enable = true;
     capSysNice = true;
