@@ -110,11 +110,6 @@
   services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
 
-  programs.gamescope = {
-    enable = true;
-    capSysNice = false;
-  };
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;  # Ouvre les ports pour Remote Play
@@ -229,7 +224,6 @@
     vlc
     mpv
     ffmpeg
-    gamescope-wsi
     papirus-icon-theme
     wowup-cf
     fastfetch
