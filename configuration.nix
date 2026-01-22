@@ -128,7 +128,7 @@
       extraEnv = {
         STEAM_FORCE_DESKTOPUI_SCALING = "1";
       };
-      extraArgs = "-language french";
+      extraArgs = "-language french -no-cef-sandbox";
     };
   };
 
