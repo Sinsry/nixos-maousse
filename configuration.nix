@@ -115,7 +115,6 @@
     owner = "root";
     group = "root";
     source = "${pkgs.bubblewrap}/bin/bwrap";
-    capabilities = "cap_sys_admin,cap_net_admin+ep";
   };
 
   programs.gamescope = {
