@@ -214,6 +214,9 @@
   environment.systemPackages = with pkgs; [
 
     niri
+    alacritty
+    fuzzel
+
 
     ntfs3g
     exfatprogs
