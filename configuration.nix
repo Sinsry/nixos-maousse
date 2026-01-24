@@ -202,6 +202,13 @@
   # Gvfs pour l'intégration SMB/NFS dans Dolphin/KDE
   services.gvfs.enable = true;
 
+
+  # Services Niri/Noctalia
+
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
+
   # --- UTILISATEUR ET PACKAGES ---
   users.users.sinsry = {
     isNormalUser = true;
