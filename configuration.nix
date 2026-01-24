@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix 
+    ./hardware-configuration.nix
     ./network-mounts.nix
     ./disks-mounts.nix
   ];
@@ -88,7 +88,7 @@
     hostName = "maousse";
     networkmanager.enable = true;
   };
-  
+
   time.timeZone = "Europe/Paris";
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
@@ -104,7 +104,7 @@
       LC_TIME = "fr_FR.UTF-8";
     };
   };
-  
+
   nixpkgs.config.allowUnfree = true;
 
   services.lact.enable = true;
@@ -132,23 +132,33 @@
     xkb.layout = "us";
     videoDrivers = [ "amdgpu" ];
   };
-  
+
   console.keyMap = "us";
 
   services.xserver.excludePackages = with pkgs; [
     xterm
   ];
 
-  services.displayManager.sddm = {
+#  services.displayManager.sddm = {
+#    enable = true;
+#    wayland.enable = true;
+#    theme = "breeze";
+#
+#    extraPackages = with pkgs; [
+#    papirus-icon-theme
+#    ];
+#
+#  };
+
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
-    theme = "breeze";
-
-    extraPackages = with pkgs; [
-    papirus-icon-theme
-  ];
-
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd niri-session";
+        user = "greeter";
+      };
     };
+  };
 
   # Bluetooth
   hardware.bluetooth = {
@@ -160,7 +170,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # Nécessaire pour les jeux 32 bits (Steam).
-    extraPackages = with pkgs; [ 
+    extraPackages = with pkgs; [
       rocmPackages.clr.icd
       vulkan-loader
       vulkan-validation-layers
@@ -199,9 +209,12 @@
     extraGroups = [ "networkmanager" "wheel" ]; # Wheel permet d'utiliser sudo.
   };
 
-  services.desktopManager.plasma6.enable = true;
+#  services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
+
+    niri
+
     ntfs3g
     exfatprogs
     nvd
@@ -288,7 +301,7 @@
     description = "Notification de mise à jour NixOS intelligente";
     after = [ "nixos-upgrade.service" ];
     wantedBy = [ "nixos-upgrade.service" ];
-    
+
     script = ''
       CURRENT_GEN=$(readlink /run/current-system)
       LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
@@ -300,7 +313,7 @@
           --urgency=normal
       fi
     '';
-    
+
     serviceConfig = {
       Type = "oneshot";
       User = "sinsry";
@@ -334,10 +347,11 @@
 
   qt = {
     enable = true;
-    platformTheme = "kde";
+#    platformTheme = "kde";
+    platformTheme = "qtct";
     style = "breeze";
   };
-  
+
   environment.variables = {
     XCURSOR_THEME = "breeze_cursors";
     QT_QPA_PLATFORMTHEME = "kde";
