@@ -348,7 +348,7 @@
   qt = {
     enable = true;
 #    platformTheme = "kde";
-    platformTheme = "qtct";
+    platformTheme = "qt5ct";
     style = "breeze";
   };
 
