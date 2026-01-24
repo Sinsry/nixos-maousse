@@ -154,7 +154,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --cmd niri-session";
         user = "greeter";
       };
     };
@@ -354,7 +354,8 @@
 
   environment.variables = {
     XCURSOR_THEME = "breeze_cursors";
-    QT_QPA_PLATFORMTHEME = "kde";
+#    QT_QPA_PLATFORMTHEME = "kde";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 
   programs.dconf.enable = true;
