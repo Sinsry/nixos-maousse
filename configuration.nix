@@ -10,7 +10,7 @@
 #==========================================================================
 #==========================================================================
 #==========================================================================
-#==========================================================================
+#==============================+++++=======================================
 
 
 
@@ -135,29 +135,22 @@
     videoDrivers = [ "amdgpu" ];
   };
   
-##### KDE - NOTIFICATION pour Niri #####
-
-services.desktopManager.plasma6.enable = true;
-
-##### KDE - NOTOFICATIO pour Niri #####
-
-
   console.keyMap = "us";
 
   services.xserver.excludePackages = with pkgs; [
     xterm
   ];
 
-#  services.displayManager.sddm = {
-#    enable = true;
-#    wayland.enable = true;
-#    theme = "breeze";
-#
-#    extraPackages = with pkgs; [
-#    papirus-icon-theme
-#    ];
-#
-#  };
+ services.displayManager.sddm = {
+    enable = true;
+     wayland.enable = true;
+     theme = "breeze";
+
+     extraPackages = with pkgs; [
+     papirus-icon-theme
+     ];
+
+ };
 
   services.greetd = {
     enable = true;
@@ -211,13 +204,6 @@ services.desktopManager.plasma6.enable = true;
   # Gvfs pour l'intégration SMB/NFS dans Dolphin/KDE
   services.gvfs.enable = true;
 
-
-  # Services Niri/Noctalia
-
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
-
-
   # --- UTILISATEUR ET PACKAGES ---
   users.users.sinsry = {
     isNormalUser = true;
@@ -225,23 +211,9 @@ services.desktopManager.plasma6.enable = true;
     extraGroups = [ "networkmanager" "wheel" ]; # Wheel permet d'utiliser sudo.
   };
 
-#  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
-
-    niri
-    nwg-look
-    adw-gtk3
-    alacritty
-    fuzzel
-    xeyes
-    xwayland-satellite
-    kdePackages.konsole
-    kdePackages.ocean-sound-theme
-#    kdePackages.plasma-workspace
-    kdePackages.dolphin
-
-
     ntfs3g
     exfatprogs
     nvd
@@ -374,15 +346,13 @@ services.desktopManager.plasma6.enable = true;
 
   qt = {
     enable = true;
-#    platformTheme = "kde";
-    platformTheme = "qt5ct";
+    platformTheme = "kde";
     style = "breeze";
   };
 
   environment.variables = {
     XCURSOR_THEME = "breeze_cursors";
-#    QT_QPA_PLATFORMTHEME = "kde";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_QPA_PLATFORMTHEME = "kde";
   };
 
   programs.dconf.enable = true;
