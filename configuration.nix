@@ -360,8 +360,8 @@
 
 
   environment.shellAliases = {
-    nixrebuild = ''sudo nixos-rebuild switch --flake path:/etc/nixos#maousse'';
-    nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
+    nixrebuild = ''cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push && cd && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse'';
+    nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push && cd";
     nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
 
   };
