@@ -353,10 +353,10 @@
 
 
   environment.shellAliases = {
-    rebuild = ''
-      sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
-    '';
+    nixrebuild = ''sudo nixos-rebuild switch --flake path:/etc/nixos#maousse'';
     nixpush = "cd /etc/nixos && sudo git add . && sudo git commit -m 'Update' && sudo git push";
+    nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+
   };
 
   environment.etc."libinput/local-overrides.quirks".source = ./asset/maousse/local-overrides.quirks;
