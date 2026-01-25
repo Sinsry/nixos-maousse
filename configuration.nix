@@ -25,10 +25,12 @@
           ];
           sha256 = "0i4ynz01vdv4lmiv8r58i0vjaj2d71lk5lw6r0wjzsldjl06zrrx";
         };
+
+        ##== retrais d'un patch
         patches = builtins.filter (p:
         !(builtins.match ".*musl.patch" (toString p) != null)
       ) (oldAttrs.patches or []);
-
+      ##==
 
 
       });
@@ -110,8 +112,6 @@
   services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
 
-#  programs.xwayland.enable = true;
-  
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;  # Ouvre les ports pour Remote Play
