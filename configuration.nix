@@ -230,6 +230,7 @@
     xeyes
     xwayland-satellite
     kdePackages.konsole
+    kdePackages.ocean-sound-theme
 
     ntfs3g
     exfatprogs
