@@ -75,7 +75,7 @@
     ];
 
     loader = {
-      timeout = 0;
+      timeout = 1;
       systemd-boot = {
         enable = true;
         consoleMode = "max";
