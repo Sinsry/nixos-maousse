@@ -7,12 +7,7 @@
     ./disks-mounts.nix
   ];
 
-#==========================================================================
-#==========================================================================
-#==========================================================================
-#==============================+++++=======================================
-
-
+#=========================================================================
 
   nixpkgs.overlays = [
     (self: super: {
@@ -25,24 +20,16 @@
           ];
           sha256 = "0i4ynz01vdv4lmiv8r58i0vjaj2d71lk5lw6r0wjzsldjl06zrrx";
         };
-
         ##== retrais d'un patch
         patches = builtins.filter (p:
         !(builtins.match ".*musl.patch" (toString p) != null)
-      ) (oldAttrs.patches or []);
-      ##==
-
-
+        ) (oldAttrs.patches or []);
+        ##== retrais d'un patch
       });
     })
   ];
 
 #==========================================================================
-#==========================================================================
-#==========================================================================
-#==========================================================================
-
-
 
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
@@ -55,7 +42,6 @@
       "splash"
       "boot.shell_on_fail"
       "amdgpu.dcverbose=0"
-    #  "loglevel=3"
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
@@ -177,7 +163,6 @@
     ];
   };
 
-  # --- DÉCOUVERTE RÉSEAU (SMB/NFS) ---
   # Activer Samba et Avahi pour la découverte réseau
   services.samba = {
     enable = true;
@@ -212,8 +197,6 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
-   # ntfs3g
-   # exfatprogs
     nvd
     rar
     libnotify
@@ -263,8 +246,6 @@
     };
     nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
   };
-
-
 
   programs.chromium = {
   enable = true;
@@ -347,12 +328,11 @@
     style = "breeze";
   };
 
- programs.dconf.enable = true;
+  programs.dconf.enable = true;
 
   environment.sessionVariables = {
     GTK_THEME = "Breeze-Dark";
   };
-
 
   environment.shellAliases = {
     nixrebuild = ''cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true) && sudo git push && cd ~/ && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse'';
