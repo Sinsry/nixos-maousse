@@ -229,7 +229,7 @@
     fuzzel
     xeyes
     xwayland-satellite
-    kconsole    
+    konsole    
 
     ntfs3g
     exfatprogs
