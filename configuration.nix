@@ -234,7 +234,9 @@
     xwayland-satellite
     kdePackages.konsole
     kdePackages.ocean-sound-theme
-    kdePackages.knotifications
+#    kdePackages.knotifications
+    kdePackages.dolphin
+
 
     ntfs3g
     exfatprogs
