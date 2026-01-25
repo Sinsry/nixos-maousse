@@ -135,8 +135,8 @@
     videoDrivers = [ "amdgpu" ];
   };
   
-  services.desktopManager.plasma6.enable = true;
-
+#  services.desktopManager.plasma6.enable = true;
+services.dbus.packages = [ pkgs.kdePackages.plasma-workspace ];
 
   console.keyMap = "us";
 
