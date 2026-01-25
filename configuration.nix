@@ -139,16 +139,6 @@
 
 services.desktopManager.plasma6.enable = true;
 
-#systemd.user.services.plasma-knotifications = {
-#  description = "KDE Notification System";
-#  wantedBy = [ "graphical-session.target" ];
-#  serviceConfig = {
-#    ExecStart = "${pkgs.kdePackages.plasma-workspace}/libexec/knotificationd";
-#    Restart = "on-failure";
-#  };
-#};
-
-
 ##### KDE - NOTOFICATIO pour Niri #####
 
 
@@ -248,7 +238,7 @@ services.desktopManager.plasma6.enable = true;
     xwayland-satellite
     kdePackages.konsole
     kdePackages.ocean-sound-theme
-    kdePackages.plasma-workspace
+#    kdePackages.plasma-workspace
     kdePackages.dolphin
 
 
