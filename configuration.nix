@@ -156,36 +156,37 @@
   ];
   users.users.sinsry.services.desktopManager.plasma6.enable = true;
   users.users.sinsry.environment.systemPackages = with pkgs; [
-    nvd
-    rar
-    libnotify
-    google-chrome
-    meld
-    cifs-utils
-    nfs-utils
-    nil
-    nixfmt
-    psmisc
-    git
-    discord
-    heroic
-    mangohud
-    goverlay
-    vulkan-tools
-    vlc
-    mpv
-    ffmpeg
-    papirus-icon-theme
-    wowup-cf
-    fastfetch
-    rsync
-    vorta
-    protonvpn-gui
-    kdePackages.kate
-    kdePackages.breeze-gtk
-    kdePackages.partitionmanager
-    kdePackages.filelight
-    kdePackages.plasma-browser-integration
+   cifs-utils
+discord
+fastfetch
+ffmpeg
+git
+google-chrome
+goverlay
+heroic
+kdePackages.breeze-gtk
+kdePackages.filelight
+kdePackages.kate
+kdePackages.partitionmanager
+kdePackages.plasma-browser-integration
+libnotify
+mangohud
+meld
+mpv
+nfs-utils
+nil
+nixfmt
+nixfmt-rfc-style
+nvd
+papirus-icon-theme
+protonvpn-gui
+psmisc
+rar
+rsync
+vlc
+vorta
+vulkan-tools
+wowup-cf
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
       background=/etc/nixos/asset/maousse/wallpaper-sddm.png
