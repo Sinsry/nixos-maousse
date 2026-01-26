@@ -195,12 +195,10 @@
     nixfmt
     nvd
     papirus-icon-theme
-    pascube
     protonvpn-gui
     psmisc
     rar
     rsync
-    vkbasalt
     vlc
     vorta
     vulkan-tools
@@ -298,9 +296,6 @@
     style = "breeze";
   };
   programs.dconf.enable = true;
-  environment.variables = {
-    VK_LAYER_PATH = "/run/current-system/sw/share/vulkan/implicit_layer.d";
-  };
   environment.sessionVariables = {
     GTK_THEME = "Breeze-Dark";
   };
