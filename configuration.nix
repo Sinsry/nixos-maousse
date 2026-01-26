@@ -163,6 +163,14 @@
     "wheel"
      "gamemode"
   ];
+    security.pam.loginLimits = [
+  {
+    domain = "@gamemode";
+    type = "-";
+    item = "nice";
+    value = "-20";  # Permet de mettre la priorité jusqu'à -20
+  }
+];
   services.desktopManager.plasma6.enable = true;
   environment.systemPackages = with pkgs; [
     cifs-utils
