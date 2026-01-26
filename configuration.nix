@@ -91,6 +91,7 @@
   nixpkgs.config.allowUnfree = true;
   services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
+  programs.gamemode.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -159,7 +160,6 @@
     discord
     fastfetch
     ffmpeg
-    gamemode
     git
     google-chrome
     goverlay
