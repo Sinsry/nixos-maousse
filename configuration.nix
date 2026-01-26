@@ -81,7 +81,6 @@
       LC_IDENTIFICATION = "fr_FR.UTF-8";
       LC_MEASUREMENT = "fr_FR.UTF-8";
       LC_MONETARY = "fr_FR.UTF-8";
-
       LC_NAME = "fr_FR.UTF-8";
       LC_NUMERIC = "fr_FR.UTF-8";
       LC_PAPER = "fr_FR.UTF-8";
@@ -156,37 +155,36 @@
   ];
   services.desktopManager.plasma6.enable = true;
   environment.systemPackages = with pkgs; [
-   cifs-utils
-discord
-fastfetch
-ffmpeg
-git
-google-chrome
-goverlay
-heroic
-kdePackages.breeze-gtk
-kdePackages.filelight
-kdePackages.kate
-kdePackages.partitionmanager
-kdePackages.plasma-browser-integration
-libnotify
-mangohud
-meld
-mpv
-nfs-utils
-nil
-nixfmt
-nixfmt-rfc-style
-nvd
-papirus-icon-theme
-protonvpn-gui
-psmisc
-rar
-rsync
-vlc
-vorta
-vulkan-tools
-wowup-cf
+    cifs-utils
+    discord
+    fastfetch
+    ffmpeg
+    git
+    google-chrome
+    goverlay
+    heroic
+    kdePackages.breeze-gtk
+    kdePackages.filelight
+    kdePackages.kate
+    kdePackages.partitionmanager
+    kdePackages.plasma-browser-integration
+    libnotify
+    mangohud
+    meld
+    mpv
+    nfs-utils
+    nil
+    nixfmt
+    nvd
+    papirus-icon-theme
+    protonvpn-gui
+    psmisc
+    rar
+    rsync
+    vlc
+    vorta
+    vulkan-tools
+    wowup-cf
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
       background=/etc/nixos/asset/maousse/wallpaper-sddm.png
@@ -289,8 +287,7 @@ wowup-cf
     nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     nixgarbage = "sudo nix-collect-garbage -d";
   };
-  environment.etc."libinput/local-overrides.quirks".source =
-    ./asset/maousse/local-overrides.quirks;
+  environment.etc."libinput/local-overrides.quirks".source = ./asset/maousse/local-overrides.quirks;
   environment.etc."inputrc".text = ''
     set completion-ignore-case on
     set show-all-if-ambiguous on
