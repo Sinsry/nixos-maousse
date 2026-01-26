@@ -160,7 +160,7 @@
     fastfetch
     ffmpeg
     git
-#    google-chrome
+    google-chrome
     goverlay
     heroic
     kdePackages.breeze-gtk
