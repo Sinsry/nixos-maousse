@@ -262,9 +262,9 @@
       fi
     '';
     serviceConfig = {
-      Type = "oneshot";
-      User = "sinsry";
-      Environment = [
+      type = "oneshot";
+      user = "sinsry";
+      environment = [
         "DISPLAY=:0"
         "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
       ];
@@ -297,6 +297,9 @@
     style = "breeze";
   };
   programs.dconf.enable = true;
+  environment.variables = {
+    VK_LAYER_PATH = "/run/current-system/sw/share/vulkan/implicit_layer.d";
+  };
   environment.sessionVariables = {
     GTK_THEME = "Breeze-Dark";
   };
