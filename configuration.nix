@@ -154,8 +154,8 @@
     "networkmanager"
     "wheel"
   ];
-  users.users.sinsry.services.desktopManager.plasma6.enable = true;
-  users.users.sinsry.environment.systemPackages = with pkgs; [
+  services.desktopManager.plasma6.enable = true;
+  environment.systemPackages = with pkgs; [
    cifs-utils
 discord
 fastfetch
@@ -196,7 +196,7 @@ wowup-cf
       Theme=Papirus-Dark
     '')
   ];
-  users.users.sinsry.programs.firefox = {
+  programs.firefox = {
     enable = true;
     languagePacks = [ "fr" ];
     preferences = {
@@ -204,7 +204,7 @@ wowup-cf
     };
     nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
   };
-  users.users.sinsry.programs.chromium = {
+  programs.chromium = {
     enable = true;
     extraOpts = {
       "NativeMessagingHosts" = {
@@ -213,7 +213,7 @@ wowup-cf
       };
     };
   };
-  users.users.sinsry.programs.git = {
+  programs.git = {
     enable = true;
     config = {
       init.defaultBranch = "main";
@@ -224,12 +224,12 @@ wowup-cf
       credential.helper = "cache --timeout=604800";
     };
   };
-  users.users.sinsry.system.autoUpgrade = {
+  system.autoUpgrade = {
     enable = true;
     allowReboot = false;
     dates = "22:00";
   };
-  users.users.sinsry.systemd.services.nixos-upgrade-notification = {
+  systemd.services.nixos-upgrade-notification = {
     description = "Notification de mise à jour NixOS intelligente";
     after = [ "nixos-upgrade.service" ];
     wantedBy = [ "nixos-upgrade.service" ];
@@ -253,11 +253,11 @@ wowup-cf
       ];
     };
   };
-  users.users.sinsry.zramSwap = {
+  zramSwap = {
     enable = true;
     memoryPercent = 12;
   };
-  users.users.sinsry.nix = {
+  nix = {
     settings = {
       experimental-features = [
         "nix-command"
@@ -274,30 +274,30 @@ wowup-cf
       options = "--delete-older-than 15d";
     };
   };
-  users.users.sinsry.qt = {
+  qt = {
     enable = true;
     platformTheme = "kde";
     style = "breeze";
   };
-  users.users.sinsry.programs.dconf.enable = true;
-  users.users.sinsry.environment.sessionVariables = {
+  programs.dconf.enable = true;
+  environment.sessionVariables = {
     GTK_THEME = "Breeze-Dark";
   };
-  users.users.sinsry.environment.shellAliases = {
+  environment.shellAliases = {
     nixrebuild = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true) && sudo git push && cd ~/ && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
     nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
     nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     nixgarbage = "sudo nix-collect-garbage -d";
   };
-  users.users.sinsry.environment.etc."libinput/local-overrides.quirks".source =
+  environment.etc."libinput/local-overrides.quirks".source =
     ./asset/maousse/local-overrides.quirks;
-  users.users.sinsry.environment.etc."inputrc".text = ''
+  environment.etc."inputrc".text = ''
     set completion-ignore-case on
     set show-all-if-ambiguous on
     set completion-map-case on
   '';
-  users.users.sinsry.programs.bash.interactiveShellInit = ''
+  programs.bash.interactiveShellInit = ''
     fastfetch
   '';
-  users.users.sinsry.system.stateVersion = "25.11";
+  system.stateVersion = "25.11";
 }
