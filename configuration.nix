@@ -24,9 +24,9 @@
           sha256 = "10v0bjqpk2l9d087kq4f8jxnxslc8yhxis58sl1vxc47vgh1ppdm";
         };
         ##== retrait d'un patch
-       # patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
-         # oldAttrs.patches or [ ]
-        #);
+        patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
+           oldAttrs.patches or [ ]
+        );
         ##== retrait d'un patch
       });
     })
