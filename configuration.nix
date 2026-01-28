@@ -312,7 +312,7 @@
     set show-all-if-ambiguous on
     set completion-map-case on
   '';
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
   programs.bash.interactiveShellInit = ''
     fastfetch
   '';
