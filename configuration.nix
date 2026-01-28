@@ -14,7 +14,7 @@
   nixpkgs.overlays = [
     (self: super: {
       mesa = super.mesa.overrideAttrs (oldAttrs: rec {
-        version = "26.0.0-rc1";
+        version = "26.0.0-rc2";
         src = super.fetchurl {
           urls = [
             "https://archive.mesa3d.org/mesa-${version}.tar.xz"
