@@ -184,6 +184,7 @@
     discord
     fastfetch
     ffmpeg
+    ghostty
     git
     google-chrome
     goverlay
