@@ -50,7 +50,6 @@
     kernel.sysctl = {
     "kernel.split_lock_mitigate" = 0;
     "kernel.nmi_watchdog" = 0;
-    "kernel.sched_bore" = "1";
     };
     kernelModules = [ "ntsync" ];
     supportedFilesystems = [
