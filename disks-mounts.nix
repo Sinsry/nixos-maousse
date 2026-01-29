@@ -36,6 +36,6 @@
     "d /mnt/Ventoy 0755 root root -"
     "d /mnt/Windows 0755 root root -"
     "d /mnt/Data_Windows 0755 root root -"
-    "d /home/sinsry/Jeux 0755 root root -"
+    "d /home/sinsry/Jeux 0755 sinsry users -"
   ];
 }
