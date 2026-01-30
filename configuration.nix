@@ -195,6 +195,7 @@
     kdePackages.partitionmanager
     kdePackages.plasma-browser-integration
     kdePackages.qtwebengine
+    ksshaskpass
     libnotify
     mangohud
     meld
@@ -212,6 +213,7 @@
     vorta
     vulkan-tools
     wowup-cf
+    zed-editor
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
       background=/etc/nixos/asset/wallpaper-sddm.png
@@ -249,6 +251,11 @@
       credential.helper = "cache --timeout=604800";
     };
   };
+  programs.ssh = {
+  startAgent = true;
+  enableAskPassword = true;
+  askPassword = "${pkgs.ksshaskpass}/bin/ksshaskpass";  # Interface KDE pour SSH
+};
   system.autoUpgrade = {
     enable = true;
     allowReboot = false;
@@ -306,8 +313,10 @@
   };
   programs.dconf.enable = true;
   environment.sessionVariables = {
-    GTK_THEME = "Breeze-Dark";
-  };
+     GTK_THEME = "Breeze-Dark";
+     SSH_ASKPASS = "${pkgs.ksshaskpass}/bin/ksshaskpass";
+     SSH_ASKPASS_REQUIRE = "prefer";
+ };
   environment.shellAliases = {
     nixrebuild = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true) && sudo git push && cd ~/ && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
     nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
