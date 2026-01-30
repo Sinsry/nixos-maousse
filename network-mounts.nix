@@ -1,4 +1,3 @@
-{ ... }:
 {
   systemd.tmpfiles.rules = [
     "d /mnt/Data 0755 root root -"
