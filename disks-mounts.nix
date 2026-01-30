@@ -1,4 +1,4 @@
-{ _config, _pkgs, ... }:
+{ ... }:
 {
   fileSystems."/mnt/Ventoy" = {
     device = "/dev/disk/by-uuid/4E21-0000";
