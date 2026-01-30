@@ -213,7 +213,6 @@
     vorta
     vulkan-tools
     wowup-cf
-    zed-editor
     (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
       [General]
       background=/etc/nixos/asset/wallpaper-sddm.png
