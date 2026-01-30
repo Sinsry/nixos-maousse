@@ -123,9 +123,9 @@
     enable = true;
     xkb.layout = "us";
     videoDrivers = [ "amdgpu" ];
+    excludePackages = with pkgs; [ xterm ];
   };
   console.keyMap = "us";
-  services.xserver.excludePackages = with pkgs; [ xterm ];
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -161,14 +161,15 @@
   };
   services.rpcbind.enable = true;
   services.gvfs.enable = true;
-
-  users.users.sinsry.isNormalUser = true;
-  users.users.sinsry.description = "Sinsry";
-  users.users.sinsry.extraGroups = [
-    "networkmanager"
-    "wheel"
-    "gamemode"
-  ];
+  users.users.sinsry = {
+    isNormalUser = true;
+    description = "Sinsry";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "gamemode"
+    ];
+  };
   security.pam.loginLimits = [
     {
       domain = "@gamemode";
@@ -276,9 +277,9 @@
       fi
     '';
     serviceConfig = {
-      type = "oneshot";
-      user = "sinsry";
-      environment = [
+      Type = "oneshot";
+      User = "sinsry";
+      Environment = [
         "DISPLAY=:0"
         "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
       ];
