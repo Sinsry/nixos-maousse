@@ -183,6 +183,7 @@
     cifs-utils
     discord
     fastfetch
+    faugus-launcher
     ffmpeg
     git
     google-chrome
