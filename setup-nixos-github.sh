@@ -83,7 +83,7 @@ sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
 # 10. Finalisation des droits et sécurité Git
 echo "Configuration des droits pour l'utilisateur sinsry..."
 # On donne la propriété du dossier à ton utilisateur (groupe 'users' par défaut sur NixOS)
-sudo chown -R sinsry:users /mnt/etc/nixos
+sudo chown -R sinsry:users /etc/nixos
 # On autorise Git à travailler dans ce dossier pour éviter l'erreur 'dubious ownership'
 # On utilise sudo -u sinsry pour que la config git soit écrite pour ton utilisateur, pas pour root
 sudo -u sinsry git config --global --add safe.directory /etc/nixos
