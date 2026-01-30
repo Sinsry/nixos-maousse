@@ -311,6 +311,14 @@
     platformTheme = "kde";
     style = "breeze";
   };
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      openssl
+    ];
+  };
   programs.dconf.enable = true;
   environment.sessionVariables = {
     GTK_THEME = "Breeze-Dark";
