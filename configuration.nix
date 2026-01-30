@@ -192,10 +192,10 @@
     kdePackages.breeze-gtk
     kdePackages.filelight
     kdePackages.kate
+    kdePackages.ksshaskpass
     kdePackages.partitionmanager
     kdePackages.plasma-browser-integration
     kdePackages.qtwebengine
-    ksshaskpass
     libnotify
     mangohud
     meld
@@ -254,7 +254,7 @@
   programs.ssh = {
   startAgent = true;
   enableAskPassword = true;
-  askPassword = "${pkgs.ksshaskpass}/bin/ksshaskpass";  # Interface KDE pour SSH
+  askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";  # Interface KDE pour SSH
 };
   system.autoUpgrade = {
     enable = true;
@@ -314,7 +314,7 @@
   programs.dconf.enable = true;
   environment.sessionVariables = {
      GTK_THEME = "Breeze-Dark";
-     SSH_ASKPASS = "${pkgs.ksshaskpass}/bin/ksshaskpass";
+     SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
      SSH_ASKPASS_REQUIRE = "prefer";
  };
   environment.shellAliases = {
