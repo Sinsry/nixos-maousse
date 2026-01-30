@@ -188,7 +188,6 @@
     git
     google-chrome
     goverlay
-    heroic
     kdePackages.breeze-gtk
     kdePackages.filelight
     kdePackages.kate
