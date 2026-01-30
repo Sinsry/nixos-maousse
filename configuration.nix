@@ -25,7 +25,7 @@
         };
         ##== retrait d'un patch
         patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
-           oldAttrs.patches or [ ]
+          oldAttrs.patches or [ ]
         );
         ##== retrait d'un patch
       });
@@ -48,8 +48,8 @@
       "udev.log_priority=3"
     ];
     kernel.sysctl = {
-    "kernel.split_lock_mitigate" = 0;
-    "kernel.nmi_watchdog" = 0;
+      "kernel.split_lock_mitigate" = 0;
+      "kernel.nmi_watchdog" = 0;
     };
     kernelModules = [ "ntsync" ];
     supportedFilesystems = [
@@ -67,9 +67,9 @@
       };
       efi.canTouchEfiVariables = true;
     };
-      #kernelPackages = pkgs.linuxPackages_latest;
-      #kernelPackages = pkgs.linuxPackages_lqx;
-      kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages_lqx;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
   networking = {
     hostName = "maousse";
@@ -101,12 +101,12 @@
   programs.gamemode = {
     enable = true;
     enableRenice = true;
-       settings = {
-          general = {
-             renice = 10;
-          };
+    settings = {
+      general = {
+        renice = 10;
       };
- };
+    };
+  };
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -168,16 +168,16 @@
   users.users.sinsry.extraGroups = [
     "networkmanager"
     "wheel"
-     "gamemode"
+    "gamemode"
   ];
-    security.pam.loginLimits = [
-  {
-    domain = "@gamemode";
-    type = "-";
-    item = "nice";
-    value = "-20";  # Permet de mettre la priorité jusqu'à -20
-  }
-];
+  security.pam.loginLimits = [
+    {
+      domain = "@gamemode";
+      type = "-";
+      item = "nice";
+      value = "-20"; # Permet de mettre la priorité jusqu'à -20
+    }
+  ];
   services.desktopManager.plasma6.enable = true;
   environment.systemPackages = with pkgs; [
     cifs-utils
@@ -201,6 +201,7 @@
     mpv
     nfs-utils
     nil
+    nixd
     nixfmt
     nvd
     papirus-icon-theme
@@ -251,10 +252,10 @@
     };
   };
   programs.ssh = {
-  startAgent = true;
-  enableAskPassword = true;
-  askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";  # Interface KDE pour SSH
-};
+    startAgent = true;
+    enableAskPassword = true;
+    askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass"; # Interface KDE pour SSH
+  };
   system.autoUpgrade = {
     enable = true;
     allowReboot = false;
@@ -312,12 +313,12 @@
   };
   programs.dconf.enable = true;
   environment.sessionVariables = {
-     GTK_THEME = "Breeze-Dark";
-     SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-     SSH_ASKPASS_REQUIRE = "prefer";
- };
+    GTK_THEME = "Breeze-Dark";
+    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    SSH_ASKPASS_REQUIRE = "prefer";
+  };
   environment.shellAliases = {
-     nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
+    nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
     #nixrebuild = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true) && sudo git push && cd ~/ && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
     nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
     nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
