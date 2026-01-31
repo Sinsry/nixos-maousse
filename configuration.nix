@@ -122,26 +122,76 @@
   nixpkgs.config.allowUnfree = true;
   services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
-  programs.gamemode = {
-    enable = true;
-    enableRenice = true;
-    settings = {
-      general = {
-        renice = 10;
+  programs = {
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+      settings = {
+        general = {
+          renice = 10;
+        };
       };
     };
-  };
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    package = pkgs.steam.override {
-      extraEnv = {
-        STEAM_FORCE_DESKTOPUI_SCALING = "1";
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      package = pkgs.steam.override {
+        extraEnv = {
+          STEAM_FORCE_DESKTOPUI_SCALING = "1";
+        };
+        extraArgs = "-language french";
       };
-      extraArgs = "-language french";
+    };
+    firefox = {
+      enable = true;
+      languagePacks = [ "fr" ];
+      preferences = {
+        "intl.locale.requested" = "fr";
+      };
+      nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
+    };
+    chromium = {
+      enable = true;
+      extraOpts = {
+        "NativeMessagingHosts" = {
+          "org.kde.plasma.browser_integration" =
+            "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+        };
+      };
+    };
+    git = {
+      enable = true;
+      config = {
+        init.defaultBranch = "main";
+        user = {
+          name = "Sinsry";
+          email = "Sinsry@users.noreply.github.com";
+        };
+        credential.helper = "cache --timeout=604800";
+      };
+    };
+    ssh = {
+      startAgent = true;
+      enableAskPassword = true;
+      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    };
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        zlib
+        openssl
+      ];
+    };
+    dconf.enable = true;
+    bash = {
+      completion.enable = true;
+      interactiveShellInit = ''
+        fastfetch
+      '';
     };
   };
   services.xserver = {
@@ -270,39 +320,6 @@
       '';
     };
   };
-  programs.firefox = {
-    enable = true;
-    languagePacks = [ "fr" ];
-    preferences = {
-      "intl.locale.requested" = "fr";
-    };
-    nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
-  };
-  programs.chromium = {
-    enable = true;
-    extraOpts = {
-      "NativeMessagingHosts" = {
-        "org.kde.plasma.browser_integration" =
-          "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-      };
-    };
-  };
-  programs.git = {
-    enable = true;
-    config = {
-      init.defaultBranch = "main";
-      user = {
-        name = "Sinsry";
-        email = "Sinsry@users.noreply.github.com";
-      };
-      credential.helper = "cache --timeout=604800";
-    };
-  };
-  programs.ssh = {
-    startAgent = true;
-    enableAskPassword = true;
-    askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass"; # Interface KDE pour SSH
-  };
   system.autoUpgrade = {
     enable = true;
     allowReboot = false;
@@ -334,18 +351,5 @@
     platformTheme = "kde";
     style = "breeze";
   };
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      zlib
-      openssl
-    ];
-  };
-  programs.dconf.enable = true;
-  programs.bash.completion.enable = true;
-  programs.bash.interactiveShellInit = ''
-    fastfetch
-  '';
   system.stateVersion = "25.11";
 }
