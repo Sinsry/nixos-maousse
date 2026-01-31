@@ -120,8 +120,39 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
-  services.lact.enable = true;
   hardware.amdgpu.overdrive.enable = true;
+  services = {
+    lact.enable = true;
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      videoDrivers = [ "amdgpu" ];
+      excludePackages = with pkgs; [ xterm ];
+    };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "breeze";
+      extraPackages = with pkgs; [ papirus-icon-theme ];
+    };
+    samba = {
+      enable = true;
+      openFirewall = true;
+    };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+      };
+    };
+    rpcbind.enable = true;
+    gvfs.enable = true;
+    desktopManager.plasma6.enable = true;
+  };
   programs = {
     gamemode = {
       enable = true;
@@ -194,19 +225,7 @@
       '';
     };
   };
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    videoDrivers = [ "amdgpu" ];
-    excludePackages = with pkgs; [ xterm ];
-  };
   console.keyMap = "us";
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "breeze";
-    extraPackages = with pkgs; [ papirus-icon-theme ];
-  };
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -221,22 +240,6 @@
       vulkan-validation-layers
     ];
   };
-  services.samba = {
-    enable = true;
-    openFirewall = true;
-  };
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
-  services.rpcbind.enable = true;
-  services.gvfs.enable = true;
   users.users.sinsry = {
     isNormalUser = true;
     description = "Sinsry";
@@ -254,7 +257,6 @@
       value = "-20"; # Permet de mettre la priorité jusqu'à -20
     }
   ];
-  services.desktopManager.plasma6.enable = true;
   environment = {
     systemPackages = with pkgs; [
       cifs-utils
