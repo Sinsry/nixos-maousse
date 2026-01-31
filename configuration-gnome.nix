@@ -235,7 +235,19 @@
         openssl
       ];
     };
-    dconf.enable = true;
+    dconf = {
+      enable = true;
+      profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/desktop/interface" = {
+              cursor-theme = "Adwaita";
+              cursor-size = 24;
+            };
+          };
+        }
+      ];
+    };
     bash = {
       completion.enable = true;
       interactiveShellInit = ''
