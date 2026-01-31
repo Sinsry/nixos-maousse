@@ -286,8 +286,8 @@
       gnomeExtensions.dash-to-dock
       google-chrome
       goverlay
-      kdePackages.breeze-icons
       libnotify
+      libsForQt5.breeze-icons
       mangohud
       mission-center
       meld
