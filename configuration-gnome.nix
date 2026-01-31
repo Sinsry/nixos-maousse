@@ -320,7 +320,7 @@
         set completion-map-case on
       '';
     };
-    environment.sessionVariables = {
+    sessionVariables = {
       XCURSOR_THEME = "Adwaita";
       XCURSOR_SIZE = "24";
     };
