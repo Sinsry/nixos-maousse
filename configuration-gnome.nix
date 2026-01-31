@@ -274,6 +274,7 @@
       gnome-themes-extra
       cifs-utils
       discord
+      dconf-editor
       fastfetch
       faugus-launcher
       ffmpeg
@@ -317,6 +318,7 @@
       yelp # Aide
       gnome-calendar # Agenda
       showtime
+      gnome-font-viewer
 
     ];
     shellAliases = {
