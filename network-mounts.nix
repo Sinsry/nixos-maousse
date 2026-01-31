@@ -1,7 +1,7 @@
 {
   systemd.tmpfiles.rules = [
-    "d /mnt/Data 0755 root root -"
-    "d /mnt/Torrents 0755 root root -"
+    "d /mnt/Data 0755 sinsry users -"
+    "d /mnt/Torrents 0755 sinsry users -"
   ];
   fileSystems."/mnt/Data" = {
     device = "192.168.1.2:/mnt/NAS/Data";
