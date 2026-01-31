@@ -177,7 +177,7 @@
     };
     rpcbind.enable = true;
     gvfs.enable = true;
-    xserver.desktopManager.gnome.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   #==== Programmes ====
