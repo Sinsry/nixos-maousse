@@ -205,49 +205,71 @@
     }
   ];
   services.desktopManager.plasma6.enable = true;
-  environment.systemPackages = with pkgs; [
-    cifs-utils
-    discord
-    fastfetch
-    faugus-launcher
-    ffmpeg
-    google-chrome
-    goverlay
-    kdePackages.breeze-gtk
-    kdePackages.filelight
-    kdePackages.kate
-    kdePackages.ksshaskpass
-    kdePackages.partitionmanager
-    kdePackages.plasma-browser-integration
-    kdePackages.qtwebengine
-    libnotify
-    mangohud
-    meld
-    mpv
-    nfs-utils
-    nil
-    nixd
-    nixfmt
-    nvd
-    papirus-icon-theme
-    protonvpn-gui
-    psmisc
-    rar
-    rsync
-    vlc
-    vorta
-    vulkan-tools
-    wowup-cf
-    zed-editor
-    (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
-      [General]
-      background=/etc/nixos/asset/wallpaper-sddm.png
-    '')
-    (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
-      [Icons]
-      Theme=Papirus-Dark
-    '')
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      cifs-utils
+      discord
+      fastfetch
+      faugus-launcher
+      ffmpeg
+      google-chrome
+      goverlay
+      kdePackages.breeze-gtk
+      kdePackages.filelight
+      kdePackages.kate
+      kdePackages.ksshaskpass
+      kdePackages.partitionmanager
+      kdePackages.plasma-browser-integration
+      kdePackages.qtwebengine
+      libnotify
+      mangohud
+      meld
+      mpv
+      nfs-utils
+      nil
+      nixd
+      nixfmt
+      nvd
+      papirus-icon-theme
+      protonvpn-gui
+      psmisc
+      rar
+      rsync
+      vlc
+      vorta
+      vulkan-tools
+      wowup-cf
+      zed-editor
+      (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+        [General]
+        background=/etc/nixos/asset/wallpaper-sddm.png
+      '')
+      (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
+        [Icons]
+        Theme=Papirus-Dark
+      '')
+    ];
+    sessionVariables = {
+      GTK_THEME = "Breeze-Dark";
+      SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+      SSH_ASKPASS_REQUIRE = "prefer";
+    };
+    shellAliases = {
+      nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
+      nixupdate = "cd /etc/nixos && sudo nix flake update && cd ~/ &&sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
+      nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
+      nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      nixgarbage = "sudo nix-collect-garbage -d";
+    };
+    etc = {
+      "libinput/local-overrides.quirks".source = ./asset/local-overrides.quirks;
+      "inputrc".text = ''
+        set completion-ignore-case on
+        set show-all-if-ambiguous on
+        set completion-map-case on
+      '';
+    };
+  };
   programs.firefox = {
     enable = true;
     languagePacks = [ "fr" ];
@@ -321,24 +343,6 @@
     ];
   };
   programs.dconf.enable = true;
-  environment.sessionVariables = {
-    GTK_THEME = "Breeze-Dark";
-    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    SSH_ASKPASS_REQUIRE = "prefer";
-  };
-  environment.shellAliases = {
-    nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
-    nixupdate = "cd /etc/nixos && sudo nix flake update && cd ~/ &&sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
-    nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
-    nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-    nixgarbage = "sudo nix-collect-garbage -d";
-  };
-  environment.etc."libinput/local-overrides.quirks".source = ./asset/local-overrides.quirks;
-  environment.etc."inputrc".text = ''
-    set completion-ignore-case on
-    set show-all-if-ambiguous on
-    set completion-map-case on
-  '';
   programs.bash.completion.enable = true;
   programs.bash.interactiveShellInit = ''
     fastfetch
