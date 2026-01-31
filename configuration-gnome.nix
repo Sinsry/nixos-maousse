@@ -227,11 +227,6 @@
         credential.helper = "cache --timeout=604800";
       };
     };
-    ssh = {
-      startAgent = true;
-      enableAskPassword = true;
-      askPassword = "${pkgs.gnome-ssh-askpass}/libexec/openssh/gnome-ssh-askpass";
-    };
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -303,10 +298,6 @@
       wowup-cf
       zed-editor
     ];
-    sessionVariables = {
-      SSH_ASKPASS = "${pkgs.gnome-ssh-askpass}/libexec/openssh/gnome-ssh-askpass";
-      SSH_ASKPASS_REQUIRE = "prefer";
-    };
     gnome.excludePackages = with pkgs; [
       epiphany
       geary
