@@ -307,6 +307,12 @@
       epiphany
       geary
       gnome-tour
+      gnome-contacts # Contacts
+      gnome-clocks # Horloge
+      gnome-weather # Météo
+      gnome-maps # Cartes
+      gnome-music # Musiques
+      simple-scan
     ];
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
