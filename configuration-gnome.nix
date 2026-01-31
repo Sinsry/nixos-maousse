@@ -277,7 +277,6 @@
       fastfetch
       faugus-launcher
       ffmpeg
-      gnome-terminal
       gnome-tweaks
       gnomeExtensions.appindicator
       gnomeExtensions.dash-to-dock
@@ -312,7 +311,13 @@
       gnome-weather # Météo
       gnome-maps # Cartes
       gnome-music # Musiques
-      simple-scan
+      simple-scan # Numériseur de documents
+      totem # Lecteur vidéo (Vidéos)
+      cheese # Caméra
+      yelp # Aide
+      gnome-calendar # Agenda
+      showtime
+
     ];
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
