@@ -74,10 +74,36 @@
     networkmanager.enable = true;
     firewall.enable = false;
   };
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.services.samba-smbd.wantedBy = lib.mkForce [ ];
-  systemd.services.samba-nmbd.wantedBy = lib.mkForce [ ];
-  systemd.services.samba-winbindd.wantedBy = lib.mkForce [ ];
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    samba-smbd.wantedBy = lib.mkForce [ ];
+    samba-nmbd.wantedBy = lib.mkForce [ ];
+    samba-winbindd.wantedBy = lib.mkForce [ ];
+    nixos-upgrade-notification = {
+      description = "Notification de mise à jour NixOS intelligente";
+      after = [ "nixos-upgrade.service" ];
+      wantedBy = [ "nixos-upgrade.service" ];
+      script = ''
+        CURRENT_GEN=$(readlink /run/current-system)
+        LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
+
+        if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
+          ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
+            "Mise à jour effectuée." \
+            --icon=system-software-update \
+            --urgency=normal
+        fi
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "sinsry";
+        Environment = [
+          "DISPLAY=:0"
+          "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+        ];
+      };
+    };
+  };
   time.timeZone = "Europe/Paris";
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
@@ -259,30 +285,6 @@
     enable = true;
     allowReboot = false;
     dates = "22:00";
-  };
-  systemd.services.nixos-upgrade-notification = {
-    description = "Notification de mise à jour NixOS intelligente";
-    after = [ "nixos-upgrade.service" ];
-    wantedBy = [ "nixos-upgrade.service" ];
-    script = ''
-      CURRENT_GEN=$(readlink /run/current-system)
-      LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
-
-      if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-        ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-          "Mise à jour effectuée." \
-          --icon=system-software-update \
-          --urgency=normal
-      fi
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "sinsry";
-      Environment = [
-        "DISPLAY=:0"
-        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
-      ];
-    };
   };
   zramSwap = {
     enable = true;
