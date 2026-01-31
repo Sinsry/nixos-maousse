@@ -111,7 +111,7 @@
       };
     };
     tmpfiles.rules = [
-      "L+ /run/current-system/sw/share/backgrounds/gnome/adwaita-l.jpg - - - - ${./asset/wallpaper.jpg}"
+      "L+ /run/current-system/sw/share/backgrounds/gnome/adwaita-l.jpg - - - - ${./asset/wallpaper.png}"
     ];
   };
 
