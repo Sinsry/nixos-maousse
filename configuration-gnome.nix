@@ -111,7 +111,7 @@
       };
     };
     tmpfiles.rules = [
-      "L+ /run/current-system/sw/share/backgrounds/gnome/adwaita-l.jpg - - - - ${./asset/wallpaper.png}"
+      "L+ /run/gdm/.config/background - - - - ${./asset/wallpaper.png}"
     ];
   };
 
@@ -165,7 +165,7 @@
     displayManager.gdm = {
       enable = true;
       wayland = true;
-      banner = ./asset/wallpaper.png;
+
     };
     samba = {
       enable = true;
@@ -344,6 +344,12 @@
         set show-all-if-ambiguous on
         set completion-map-case on
       '';
+      "dconf/db/gdm.d/01-background".text = ''
+        [org/gnome/desktop/background]
+        picture-uri='file:///run/gdm/.config/background'
+        picture-uri-dark='file:///run/gdm/.config/background'
+        picture-options='zoom'
+      '';
     };
     sessionVariables = {
       XCURSOR_THEME = "Adwaita";
@@ -358,6 +364,9 @@
       allowReboot = false;
       dates = "22:00";
     };
+    activationScripts.gdm-background = ''
+      ${pkgs.dconf}/bin/dconf update
+    '';
     stateVersion = "25.11";
   };
 
