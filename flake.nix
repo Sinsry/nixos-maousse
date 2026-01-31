@@ -1,8 +1,12 @@
 {
   description = "Configuration NixOS Full Unstable";
+
+  #==== Sources ====
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
+
+  #==== Configuration ====
   outputs =
     inputs@{ self, nixpkgs, ... }:
     {
