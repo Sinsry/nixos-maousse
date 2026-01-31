@@ -271,7 +271,6 @@
       adwaita-icon-theme
       gnome-themes-extra
       cifs-utils
-      dconf-editor
       discord
       fastfetch
       faugus-launcher
@@ -323,6 +322,10 @@
       '';
     };
     sessionVariables = {
+      XCURSOR_THEME = "Adwaita";
+      XCURSOR_SIZE = "24";
+    };
+    variables = {
       XCURSOR_THEME = "Adwaita";
       XCURSOR_SIZE = "24";
     };
