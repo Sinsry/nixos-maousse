@@ -74,24 +74,47 @@
     networkmanager.enable = true;
     firewall.enable = false;
   };
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.services.samba-smbd.wantedBy = lib.mkForce [ ];
-  systemd.services.samba-nmbd.wantedBy = lib.mkForce [ ];
-  systemd.services.samba-winbindd.wantedBy = lib.mkForce [ ];
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    samba-smbd.wantedBy = lib.mkForce [ ];
+    samba-nmbd.wantedBy = lib.mkForce [ ];
+    samba-winbindd.wantedBy = lib.mkForce [ ];
+    nixos-upgrade-notification = {
+      description = "Notification de mise à jour NixOS intelligente";
+      after = [ "nixos-upgrade.service" ];
+      wantedBy = [ "nixos-upgrade.service" ];
+      script = ''
+        if [ "$(readlink /run/current-system)" != "$(readlink /nix/var/nix/profiles/system)" ]; then
+          ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
+            "Mise à jour effectuée." \
+            --icon=system-software-update \
+            --urgency=normal
+        fi
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "sinsry";
+        Environment = [
+          "DISPLAY=:0"
+          "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+        ];
+      };
+    };
+  };
   time.timeZone = "Europe/Paris";
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "fr_FR.UTF-8";
-      LC_IDENTIFICATION = "fr_FR.UTF-8";
-      LC_MEASUREMENT = "fr_FR.UTF-8";
-      LC_MONETARY = "fr_FR.UTF-8";
-      LC_NAME = "fr_FR.UTF-8";
-      LC_NUMERIC = "fr_FR.UTF-8";
-      LC_PAPER = "fr_FR.UTF-8";
-      LC_TELEPHONE = "fr_FR.UTF-8";
-      LC_TIME = "fr_FR.UTF-8";
-    };
+    extraLocaleSettings = lib.genAttrs [
+      "LC_ADDRESS"
+      "LC_IDENTIFICATION"
+      "LC_MEASUREMENT"
+      "LC_MONETARY"
+      "LC_NAME"
+      "LC_NUMERIC"
+      "LC_PAPER"
+      "LC_TELEPHONE"
+      "LC_TIME"
+    ] (_: "fr_FR.UTF-8");
   };
   nixpkgs.config.allowUnfree = true;
   services.lact.enable = true;
@@ -261,30 +284,7 @@
     allowReboot = false;
     dates = "22:00";
   };
-  systemd.services.nixos-upgrade-notification = {
-    description = "Notification de mise à jour NixOS intelligente";
-    after = [ "nixos-upgrade.service" ];
-    wantedBy = [ "nixos-upgrade.service" ];
-    script = ''
-      CURRENT_GEN=$(readlink /run/current-system)
-      LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
 
-      if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-        ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-          "Mise à jour effectuée." \
-          --icon=system-software-update \
-          --urgency=normal
-      fi
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "sinsry";
-      Environment = [
-        "DISPLAY=:0"
-        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
-      ];
-    };
-  };
   zramSwap = {
     enable = true;
     memoryPercent = 12;
