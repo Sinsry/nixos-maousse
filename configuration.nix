@@ -189,20 +189,12 @@
     git
     google-chrome
     goverlay
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
-    gst_all_1.gst-vaapi
     kdePackages.breeze-gtk
     kdePackages.filelight
     kdePackages.kate
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
     kdePackages.plasma-browser-integration
-    kdePackages.qtmultimedia
     kdePackages.qtwebengine
     libnotify
     mangohud
@@ -333,14 +325,6 @@
     GTK_THEME = "Breeze-Dark";
     SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     SSH_ASKPASS_REQUIRE = "prefer";
-    QT_MEDIA_BACKEND = "gstreamer";
-    GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
-      pkgs.gst_all_1.gst-plugins-base
-      pkgs.gst_all_1.gst-plugins-good
-      pkgs.gst_all_1.gst-plugins-bad
-      pkgs.gst_all_1.gst-plugins-ugly
-      pkgs.gst_all_1.gst-libav
-    ];
   };
   environment.shellAliases = {
     nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
