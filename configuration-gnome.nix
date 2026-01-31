@@ -271,6 +271,7 @@
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
+      gdm-settings
       gnome-themes-extra
       cifs-utils
       discord
@@ -285,6 +286,7 @@
       goverlay
       libnotify
       mangohud
+      mission-center
       meld
       mpv
       nfs-utils
@@ -319,6 +321,7 @@
       gnome-calendar # Agenda
       showtime
       gnome-font-viewer
+      gnome-system-monitor
 
     ];
     shellAliases = {
