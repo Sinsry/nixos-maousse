@@ -195,6 +195,7 @@
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
     kdePackages.plasma-browser-integration
+    kdePackages.qtmultimedia
     kdePackages.qtwebengine
     libnotify
     mangohud
