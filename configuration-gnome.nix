@@ -165,6 +165,7 @@
     displayManager.gdm = {
       enable = true;
       wayland = true;
+      banner = ./asset/wallpaper.png;
     };
     samba = {
       enable = true;
