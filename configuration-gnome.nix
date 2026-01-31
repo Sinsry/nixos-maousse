@@ -237,16 +237,6 @@
     };
     dconf = {
       enable = true;
-      profiles.user.databases = [
-        {
-          settings = {
-            "org/gnome/desktop/interface" = {
-              cursor-theme = "Adwaita";
-              cursor-size = lib.gvariant.mkInt32 24;
-            };
-          };
-        }
-      ];
     };
     bash = {
       completion.enable = true;
@@ -334,10 +324,6 @@
       '';
     };
     sessionVariables = {
-      XCURSOR_THEME = "Adwaita";
-      XCURSOR_SIZE = "24";
-    };
-    variables = {
       XCURSOR_THEME = "Adwaita";
       XCURSOR_SIZE = "24";
     };
