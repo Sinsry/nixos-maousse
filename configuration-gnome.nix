@@ -111,7 +111,9 @@
       };
     };
     tmpfiles.rules = [
-      "L+ /run/gdm/.config/background - - - - ${./asset/wallpaper.png}"
+      "d /var/lib/AccountsService/users 0775 root root -"
+      "d /var/lib/AccountsService/icons 0775 root root -"
+      "f /var/lib/AccountsService/users/sinsry 0600 root root - -"
     ];
   };
 
@@ -344,11 +346,11 @@
         set show-all-if-ambiguous on
         set completion-map-case on
       '';
-      "dconf/db/gdm.d/01-background".text = ''
-        [org/gnome/desktop/background]
-        picture-uri='file:///run/gdm/.config/background'
-        picture-uri-dark='file:///run/gdm/.config/background'
-        picture-options='zoom'
+      "AccountsService/users/sinsry".text = ''
+        [User]
+        Session=gnome
+        Icon=${./asset/wallpaper.png}
+        SystemAccount=false
       '';
     };
     sessionVariables = {
@@ -364,9 +366,6 @@
       allowReboot = false;
       dates = "22:00";
     };
-    activationScripts.gdm-background = ''
-      ${pkgs.dconf}/bin/dconf update
-    '';
     stateVersion = "25.11";
   };
 
