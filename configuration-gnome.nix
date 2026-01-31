@@ -79,35 +79,40 @@
   };
 
   #==== Services Systemd ====
-  systemd.services = {
-    NetworkManager-wait-online.enable = false;
-    samba-smbd.wantedBy = lib.mkForce [ ];
-    samba-nmbd.wantedBy = lib.mkForce [ ];
-    samba-winbindd.wantedBy = lib.mkForce [ ];
-    nixos-upgrade-notification = {
-      description = "Notification de mise à jour NixOS intelligente";
-      after = [ "nixos-upgrade.service" ];
-      wantedBy = [ "nixos-upgrade.service" ];
-      script = ''
-        CURRENT_GEN=$(readlink /run/current-system)
-        LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
+  systemd = {
+    services = {
+      NetworkManager-wait-online.enable = false;
+      samba-smbd.wantedBy = lib.mkForce [ ];
+      samba-nmbd.wantedBy = lib.mkForce [ ];
+      samba-winbindd.wantedBy = lib.mkForce [ ];
+      nixos-upgrade-notification = {
+        description = "Notification de mise à jour NixOS intelligente";
+        after = [ "nixos-upgrade.service" ];
+        wantedBy = [ "nixos-upgrade.service" ];
+        script = ''
+          CURRENT_GEN=$(readlink /run/current-system)
+          LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
 
-        if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-          ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-            "Mise à jour effectuée." \
-            --icon=system-software-update \
-            --urgency=normal
-        fi
-      '';
-      serviceConfig = {
-        Type = "oneshot";
-        User = "sinsry";
-        Environment = [
-          "DISPLAY=:0"
-          "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
-        ];
+          if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
+            ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
+              "Mise à jour effectuée." \
+              --icon=system-software-update \
+              --urgency=normal
+          fi
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          User = "sinsry";
+          Environment = [
+            "DISPLAY=:0"
+            "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+          ];
+        };
       };
     };
+    tmpfiles.rules = [
+      "L+ /run/current-system/sw/share/backgrounds/gnome/adwaita-l.jpg - - - - /etc/gdm-background"
+    ];
   };
 
   #==== Localisation ====
@@ -338,6 +343,7 @@
         set show-all-if-ambiguous on
         set completion-map-case on
       '';
+      "gdm-background".source = /etc/nixos/asset/wallpaper.png;
     };
     sessionVariables = {
       XCURSOR_THEME = "Adwaita";
