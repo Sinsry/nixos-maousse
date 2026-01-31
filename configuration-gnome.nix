@@ -273,6 +273,7 @@
       fastfetch
       faugus-launcher
       ffmpeg
+      gnome-terminal
       gnome-tweaks
       gnomeExtensions.appindicator
       gnomeExtensions.dash-to-dock
