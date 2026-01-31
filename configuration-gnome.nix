@@ -326,6 +326,7 @@
       showtime
       gnome-font-viewer
       gnome-system-monitor
+      gnome-text-editor
 
     ];
     shellAliases = {
