@@ -9,7 +9,7 @@
     ./network-mounts.nix
     ./disks-mounts.nix
   ];
-  #======================MESA26_RC1========================================
+  #==== Overlay Mesa (temporaire) ====
   nixpkgs.overlays = [
     (self: super: {
       mesa = super.mesa.overrideAttrs (oldAttrs: rec {
@@ -30,7 +30,8 @@
       });
     })
   ];
-  #======================MESA26_RC1========================================
+
+  #==== Boot ====
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
     initrd.systemd.enable = true;
@@ -69,11 +70,15 @@
     #kernelPackages = pkgs.linuxPackages_lqx;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
+
+  #==== Réseau ====
   networking = {
     hostName = "maousse";
     networkmanager.enable = true;
     firewall.enable = false;
   };
+
+  #==== Services Systemd ====
   systemd.services = {
     NetworkManager-wait-online.enable = false;
     samba-smbd.wantedBy = lib.mkForce [ ];
@@ -104,6 +109,8 @@
       };
     };
   };
+
+  #==== Localisation ====
   time.timeZone = "Europe/Paris";
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
@@ -121,6 +128,8 @@
   };
   console.keyMap = "us";
   nixpkgs.config.allowUnfree = true;
+
+  #==== Matériel ====
   hardware = {
     amdgpu.overdrive.enable = true;
     bluetooth = {
@@ -138,6 +147,8 @@
       ];
     };
   };
+
+  #==== Services ====
   services = {
     lact.enable = true;
     xserver = {
@@ -170,6 +181,8 @@
     gvfs.enable = true;
     desktopManager.plasma6.enable = true;
   };
+
+  #==== Programmes ====
   programs = {
     gamemode = {
       enable = true;
@@ -242,6 +255,8 @@
       '';
     };
   };
+
+  #==== Utilisateurs ====
   users.users.sinsry = {
     isNormalUser = true;
     description = "Sinsry";
@@ -251,6 +266,8 @@
       "gamemode"
     ];
   };
+
+  #==== Sécurité ====
   security.pam.loginLimits = [
     {
       domain = "@gamemode";
@@ -259,6 +276,8 @@
       value = "-20"; # Permet de mettre la priorité jusqu'à -20
     }
   ];
+
+  #==== Environnement ====
   environment = {
     systemPackages = with pkgs; [
       cifs-utils
@@ -324,6 +343,8 @@
       '';
     };
   };
+
+  #==== Système ====
   system = {
     autoUpgrade = {
       enable = true;
@@ -332,10 +353,14 @@
     };
     stateVersion = "25.11";
   };
+
+  #==== Swap ====
   zramSwap = {
     enable = true;
     memoryPercent = 12;
   };
+
+  #==== Nix ====
   nix = {
     settings = {
       experimental-features = [
@@ -353,6 +378,8 @@
       options = "--delete-older-than 15d";
     };
   };
+
+  #==== Qt ====
   qt = {
     enable = true;
     platformTheme = "kde";
