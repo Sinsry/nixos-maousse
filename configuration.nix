@@ -324,10 +324,13 @@
       '';
     };
   };
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "22:00";
+  system = {
+    autoUpgrade = {
+      enable = true;
+      allowReboot = false;
+      dates = "22:00";
+    };
+    stateVersion = "25.11";
   };
   zramSwap = {
     enable = true;
@@ -355,5 +358,4 @@
     platformTheme = "kde";
     style = "breeze";
   };
-  system.stateVersion = "25.11";
 }
