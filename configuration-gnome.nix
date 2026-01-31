@@ -343,7 +343,6 @@
         set show-all-if-ambiguous on
         set completion-map-case on
       '';
-      "gdm-background".source = /etc/nixos/asset/wallpaper.png;
     };
     sessionVariables = {
       XCURSOR_THEME = "Adwaita";
