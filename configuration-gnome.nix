@@ -157,11 +157,9 @@
       videoDrivers = [ "amdgpu" ];
       excludePackages = with pkgs; [ xterm ];
     };
-    displayManager.sddm = {
+    displayManager.gdm = {
       enable = true;
-      wayland.enable = true;
-      theme = "breeze";
-      extraPackages = with pkgs; [ papirus-icon-theme ];
+      wayland = true;
     };
     samba = {
       enable = true;
@@ -179,7 +177,7 @@
     };
     rpcbind.enable = true;
     gvfs.enable = true;
-    desktopManager.plasma6.enable = true;
+    xserver.desktopManager.gnome.enable = true;
   };
 
   #==== Programmes ====
@@ -212,16 +210,11 @@
       preferences = {
         "intl.locale.requested" = "fr";
       };
-      nativeMessagingHosts.packages = [ pkgs.kdePackages.plasma-browser-integration ];
+      nativeMessagingHosts.packages = [ pkgs.gnomeExtensions.gsconnect ];
     };
     chromium = {
       enable = true;
-      extraOpts = {
-        "NativeMessagingHosts" = {
-          "org.kde.plasma.browser_integration" =
-            "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-        };
-      };
+      extraOpts = { };
     };
     git = {
       enable = true;
@@ -237,7 +230,7 @@
     ssh = {
       startAgent = true;
       enableAskPassword = true;
-      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+      askPassword = "${pkgs.gnome-ssh-askpass}/libexec/openssh/gnome-ssh-askpass";
     };
     nix-ld = {
       enable = true;
@@ -285,15 +278,11 @@
       fastfetch
       faugus-launcher
       ffmpeg
+      gnome-tweaks
+      gnomeExtensions.appindicator
+      gnomeExtensions.dash-to-dock
       google-chrome
       goverlay
-      kdePackages.breeze-gtk
-      kdePackages.filelight
-      kdePackages.kate
-      kdePackages.ksshaskpass
-      kdePackages.partitionmanager
-      kdePackages.plasma-browser-integration
-      kdePackages.qtwebengine
       libnotify
       mangohud
       meld
@@ -313,20 +302,19 @@
       vulkan-tools
       wowup-cf
       zed-editor
-      (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
-        [General]
-        background=/etc/nixos/asset/wallpaper-sddm.png
-      '')
-      (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
-        [Icons]
-        Theme=Papirus-Dark
-      '')
+
     ];
     sessionVariables = {
-      GTK_THEME = "Breeze-Dark";
-      SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+      SSH_ASKPASS = "${pkgs.gnome-ssh-askpass}/libexec/openssh/gnome-ssh-askpass";
       SSH_ASKPASS_REQUIRE = "prefer";
     };
+    gnome.excludePackages = with pkgs; [
+      epiphany
+      geary
+      gnome-tour
+      gnome-connections
+      gnome-console
+    ];
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
       nixupdate = "cd /etc/nixos && sudo nix flake update && cd ~/ &&sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
@@ -382,7 +370,7 @@
   #==== Qt ====
   qt = {
     enable = true;
-    platformTheme = "kde";
-    style = "breeze";
+    platformTheme = "gnome";
+    style = "adwaita-dark";
   };
 }
