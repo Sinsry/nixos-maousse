@@ -268,7 +268,10 @@
   #==== Environnement ====
   environment = {
     systemPackages = with pkgs; [
+      adwaita-icon-theme
+      gnome-themes-extra
       cifs-utils
+      dconf-editor
       discord
       fastfetch
       faugus-launcher
