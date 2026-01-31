@@ -242,7 +242,7 @@
           settings = {
             "org/gnome/desktop/interface" = {
               cursor-theme = "Adwaita";
-              cursor-size = lib.gvariant.mkInt32 24;;
+              cursor-size = lib.gvariant.mkInt32 24;
             };
           };
         }
