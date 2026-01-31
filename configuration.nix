@@ -120,7 +120,23 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
-  hardware.amdgpu.overdrive.enable = true;
+  hardware = {
+    amdgpu.overdrive.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    xpadneo.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        rocmPackages.clr.icd
+        vulkan-loader
+        vulkan-validation-layers
+      ];
+    };
+  };
   services = {
     lact.enable = true;
     xserver = {
@@ -226,20 +242,6 @@
     };
   };
   console.keyMap = "us";
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-  hardware.xpadneo.enable = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-      vulkan-loader
-      vulkan-validation-layers
-    ];
-  };
   users.users.sinsry = {
     isNormalUser = true;
     description = "Sinsry";
