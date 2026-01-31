@@ -119,6 +119,7 @@
       LC_TIME = "fr_FR.UTF-8";
     };
   };
+  console.keyMap = "us";
   nixpkgs.config.allowUnfree = true;
   hardware = {
     amdgpu.overdrive.enable = true;
@@ -241,7 +242,6 @@
       '';
     };
   };
-  console.keyMap = "us";
   users.users.sinsry = {
     isNormalUser = true;
     description = "Sinsry";
