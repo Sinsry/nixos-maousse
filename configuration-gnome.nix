@@ -302,7 +302,6 @@
       vulkan-tools
       wowup-cf
       zed-editor
-
     ];
     sessionVariables = {
       SSH_ASKPASS = "${pkgs.gnome-ssh-askpass}/libexec/openssh/gnome-ssh-askpass";
