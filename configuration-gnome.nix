@@ -110,11 +110,6 @@
         };
       };
     };
-    tmpfiles.rules = [
-      "d /var/lib/AccountsService/users 0775 root root -"
-      "d /var/lib/AccountsService/icons 0775 root root -"
-      "f /var/lib/AccountsService/users/sinsry 0600 root root - -"
-    ];
   };
 
   #==== Localisation ====
@@ -279,7 +274,6 @@
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
-      gdm-settings
       gnome-themes-extra
       cifs-utils
       discord
@@ -292,6 +286,7 @@
       gnomeExtensions.dash-to-dock
       google-chrome
       goverlay
+      kdePackages.breeze-icons
       libnotify
       mangohud
       mission-center
@@ -346,15 +341,9 @@
         set show-all-if-ambiguous on
         set completion-map-case on
       '';
-      "AccountsService/users/sinsry".text = ''
-        [User]
-        Session=gnome
-        Icon=${./asset/wallpaper.png}
-        SystemAccount=false
-      '';
     };
     sessionVariables = {
-      XCURSOR_THEME = "Adwaita";
+      XCURSOR_THEME = "breeze_cursors";
       XCURSOR_SIZE = "24";
     };
   };
