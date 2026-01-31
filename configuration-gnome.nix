@@ -320,6 +320,10 @@
         set completion-map-case on
       '';
     };
+    environment.sessionVariables = {
+      XCURSOR_THEME = "Adwaita";
+      XCURSOR_SIZE = "24";
+    };
   };
 
   #==== Système ====
