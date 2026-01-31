@@ -302,8 +302,6 @@
       epiphany
       geary
       gnome-tour
-      gnome-connections
-      gnome-console
     ];
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
