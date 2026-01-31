@@ -286,6 +286,7 @@
       gnomeExtensions.dash-to-dock
       google-chrome
       goverlay
+      kdePackages.breeze
       libnotify
       libsForQt5.breeze-icons
       mangohud
