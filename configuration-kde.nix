@@ -322,10 +322,8 @@
         Theme=Papirus-Dark
       '')
     ];
-    plasma6.excludePackages = with pkgs; [
-      kdePackages.kwrite
-      
-    ];
+    #    plasma6.excludePackages = with pkgs; [
+    #   ];
 
     sessionVariables = {
       GTK_THEME = "Breeze-Dark";
