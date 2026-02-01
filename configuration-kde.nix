@@ -315,7 +315,7 @@
       zed-editor
       (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
         [General]
-        background=/etc/nixos/asset/wallpaper-sddm.png
+        background=/etc/nixos/asset/wallpaper.png
       '')
       (pkgs.writeTextDir "etc/xdg/kdeglobals" ''
         [Icons]
