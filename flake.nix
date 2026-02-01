@@ -13,8 +13,8 @@
       nixosConfigurations.maousse = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
-        modules = [ ./configuration-gnome.nix ];
-        #modules = [ ./configuration-kde.nix ];
+        #modules = [ ./configuration-gnome.nix ];
+        modules = [ ./configuration-kde.nix ];
       };
     };
 }
