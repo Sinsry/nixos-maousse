@@ -181,6 +181,11 @@
     rpcbind.enable = true;
     gvfs.enable = true;
     desktopManager.gnome.enable = true;
+    pipewire = {
+      enable = true;
+      jack.enable = true;
+      pulse.enable = true;
+    };
   };
 
   #==== Programmes ====
