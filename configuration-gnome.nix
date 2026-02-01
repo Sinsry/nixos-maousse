@@ -291,7 +291,7 @@
       gnomeExtensions.dash-to-dock
       gnomeExtensions.dash-to-dock
       gnomeExtensions.quick-settings-audio-devices-renamer
-      gnomeExtensions.quick-settings-audio-panel
+#      gnomeExtensions.quick-settings-audio-panel
       gnomeExtensions.blur-my-shell
       gnomeExtensions.arcmenu
       gnomeExtensions.bluetooth-battery
