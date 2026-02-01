@@ -284,6 +284,18 @@
       gnome-tweaks
       gnomeExtensions.appindicator
       gnomeExtensions.dash-to-dock
+      gnomeExtensions.gsconnect
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.quick-settings-audio-panel
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.tiling-shell
+      gnomeExtensions.vitals
+      gnomeExtensions.rounded-window-corners-reborn
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.open-bar
+      gnomeExtensions.arcmenu
+      gnomeExtensions.bluetooth-battery
+      gnomeExtensions.bluetooth-battery-meter
       google-chrome
       goverlay
       kdePackages.breeze
