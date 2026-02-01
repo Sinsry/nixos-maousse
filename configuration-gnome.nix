@@ -292,7 +292,6 @@
       gnomeExtensions.vitals
       gnomeExtensions.rounded-window-corners-reborn
       gnomeExtensions.dash-to-panel
-      gnomeExtensions.open-bar
       gnomeExtensions.arcmenu
       gnomeExtensions.bluetooth-battery
       gnomeExtensions.bluetooth-battery-meter
