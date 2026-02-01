@@ -323,7 +323,8 @@
       '')
     ];
     plasma6.excludePackages = with pkgs; [
-      kdePackages.kwrited
+      kdePackages.kwrite
+      
     ];
 
     sessionVariables = {
