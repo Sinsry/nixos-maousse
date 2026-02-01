@@ -322,6 +322,10 @@
         Theme=Papirus-Dark
       '')
     ];
+    plasma6.excludePackages = with pkgs; [
+      kdePackages.kwrited
+    ];
+
     sessionVariables = {
       GTK_THEME = "Breeze-Dark";
       SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
