@@ -227,7 +227,7 @@
       enable = true;
       extensions = with pkgs.vscode-extensions; [
         ms-ceintl.vscode-language-pack-fr
-        vscode-extensions.anthropic.claude-code
+        anthropic.claude-code
       ];
     };
     git = {
