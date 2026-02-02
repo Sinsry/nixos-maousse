@@ -314,7 +314,7 @@
       papirus-icon-theme
       protonvpn-gui
       psmisc
-      rar
+      #rar
       rsync
       vlc
       vorta
