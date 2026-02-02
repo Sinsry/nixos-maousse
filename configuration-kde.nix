@@ -225,8 +225,9 @@
     };
     vscode = {
       enable = true;
-      extensions = pkgs.vscode-extensions {
-      };
+      extensions = with pkgs.vscode-extensions; [
+        ms-ceintl.vscode-language-pack-fr
+      ];
     };
     git = {
       enable = true;
