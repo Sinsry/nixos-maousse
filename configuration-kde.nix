@@ -310,6 +310,7 @@
       rsync
       vlc
       vorta
+      vscode
       vulkan-tools
       wowup-cf
       zed-editor
