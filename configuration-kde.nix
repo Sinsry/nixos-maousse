@@ -223,6 +223,9 @@
         };
       };
     };
+    vscode = {
+      enable = true;
+    };
     git = {
       enable = true;
       config = {
@@ -310,7 +313,6 @@
       rsync
       vlc
       vorta
-      vscode
       vulkan-tools
       wowup-cf
       zed-editor
