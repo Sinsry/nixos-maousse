@@ -225,6 +225,8 @@
     };
     vscode = {
       enable = true;
+      extensions = pkgs.vscode-extensions {
+      };
     };
     git = {
       enable = true;
