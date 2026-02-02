@@ -38,7 +38,10 @@
     "/home/sinsry/Jeux" = {
       device = "/dev/disk/by-uuid/c5f40b61-d064-468c-932a-c3460bc762ed";
       fsType = "ext4";
-      options = [ "nofail" ];
+      options = [ 
+        "nofail"
+        "discard"
+      ];
     };
   };
 
