@@ -339,7 +339,7 @@
     };
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
-      nixupdate = "cd /etc/nixos && sudo nix flake update && cd ~/ && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
+      nixupdate = "PREV=$(readlink /nix/var/nix/profiles/system) && cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake path:/etc/nixos#maousse && nvd diff $PREV /nix/var/nix/profiles/system && cd ~/";
       nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
       nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       nixgarbage = "sudo nix-collect-garbage -d && sudo nixos-rebuild boot";
