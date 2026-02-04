@@ -13,14 +13,14 @@
   nixpkgs.overlays = [
     (self: super: {
       mesa = super.mesa.overrideAttrs (oldAttrs: rec {
-        version = "26.0.0-rc2";
+        version = "26.0.0-rc3";
         src = super.fetchurl {
           urls = [
             "https://archive.mesa3d.org/mesa-${version}.tar.xz"
             "https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
           ];
           ## calcul du hash : nix-prefetch-url https://archive.mesa3d.org/mesa-${version}.tar.xz
-          sha256 = "10v0bjqpk2l9d087kq4f8jxnxslc8yhxis58sl1vxc47vgh1ppdm";
+          sha256 = "1mjhmsb2l52q6gzl2q5q89iiwirh0i6hzl5hvb7gy9dmkfqhy0f0";
         };
         ##== retrait d'un patch
         patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
