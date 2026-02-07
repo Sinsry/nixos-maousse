@@ -46,11 +46,17 @@
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
+      "intel_iommu=on"
     ];
     kernel.sysctl = {
       "kernel.split_lock_mitigate" = 0;
     };
-    kernelModules = [ "ntsync" ];
+    kernelModules = [
+      "ntsync"
+      "vfio_pci"
+      "vfio"
+      "vfio_iommu_type1"
+    ];
     supportedFilesystems = [
       "ntfs"
       "exfat"
@@ -323,6 +329,7 @@
       nixfmt
       nvd
       papirus-icon-theme
+      pciutils
       protonvpn-gui
       psmisc
       rar
