@@ -263,7 +263,7 @@
         fastfetch
       '';
     };
-    virt-manager =true;
+    virtualisation.libvirtd.enable = true;
   };
 
   #==== Utilisateurs ====
