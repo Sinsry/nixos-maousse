@@ -344,7 +344,7 @@
     #   ];
 
     sessionVariables = {
-      GDK_BACKEND= "x11 virt-manager";
+      GDK_BACKEND= "x11";
       GTK_THEME = "Breeze-Dark";
       SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
       SSH_ASKPASS_REQUIRE = "prefer";
