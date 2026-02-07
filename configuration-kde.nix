@@ -180,8 +180,15 @@
     rpcbind.enable = true;
     gvfs.enable = true;
     desktopManager.plasma6.enable = true;
+    qemuGuest.enable = true;
+    spice-vdagentd.enable = true;
   };
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.vhostUserPackages = with pkgs; [
+      virtiofsd
+    ];
+  }
 
   #==== Programmes ====
   programs = {
@@ -293,6 +300,7 @@
     systemPackages = with pkgs; [
       cifs-utils
       discord
+      dnsmasq
       fastfetch
       faugus-launcher
       ffmpeg
