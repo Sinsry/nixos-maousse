@@ -191,6 +191,9 @@
   };
   virtualisation.libvirtd = {
     enable = true;
+      qemu = {
+        swtpm.enable = true;
+      };
     qemu.vhostUserPackages = with pkgs; [
       virtiofsd
     ];
