@@ -316,6 +316,7 @@
       psmisc
       rar
       rsync
+      solaar
       vlc
       vorta
       vulkan-tools
