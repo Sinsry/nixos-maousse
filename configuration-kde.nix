@@ -378,6 +378,10 @@
 
   #==== Système ====
   system = {
+    activationScripts.binbash = ''
+      mkdir -p /bin
+      ln -sf ${pkgs.bash}/bin/bash /bin/bash
+    '';
     autoUpgrade = {
       enable = true;
       allowReboot = false;
