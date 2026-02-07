@@ -188,7 +188,7 @@
     qemu.vhostUserPackages = with pkgs; [
       virtiofsd
     ];
-  }
+  };
 
   #==== Programmes ====
   programs = {
