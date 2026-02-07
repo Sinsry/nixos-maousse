@@ -181,6 +181,7 @@
     gvfs.enable = true;
     desktopManager.plasma6.enable = true;
   };
+  virtualisation.libvirtd.enable = true;
 
   #==== Programmes ====
   programs = {
@@ -262,6 +263,7 @@
         fastfetch
       '';
     };
+    virt-manager =true;
   };
 
   #==== Utilisateurs ====
@@ -272,6 +274,7 @@
       "networkmanager"
       "wheel"
       "gamemode"
+      "libvirtd"
     ];
   };
 
