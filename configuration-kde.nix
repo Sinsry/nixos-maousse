@@ -323,6 +323,7 @@
       kdePackages.plasma-browser-integration
       kdePackages.qtwebengine
       libnotify
+      usbutils
       mangohud
       meld
       mpv
