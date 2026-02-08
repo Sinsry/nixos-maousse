@@ -74,7 +74,8 @@
     };
     #kernelPackages = pkgs.linuxPackages_latest;
     #kernelPackages = pkgs.linuxPackages_lqx;
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_testing;
   };
 
   #==== Réseau ====
@@ -157,7 +158,6 @@
   #==== Services ====
   services = {
     lact.enable = true;
-    solaar.enable = true;
     xserver = {
       enable = true;
       xkb.layout = "us";
