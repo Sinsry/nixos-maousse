@@ -157,6 +157,7 @@
   #==== Services ====
   services = {
     lact.enable = true;
+    solaar.enable = true;
     xserver = {
       enable = true;
       xkb.layout = "us";
