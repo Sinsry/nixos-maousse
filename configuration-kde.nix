@@ -311,6 +311,7 @@
       cifs-utils
       discord
       dnsmasq
+      dualsensectl
       fastfetch
       faugus-launcher
       ffmpeg
