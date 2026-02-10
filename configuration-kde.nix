@@ -255,44 +255,43 @@
         anthropic.claude-code
         jnoortheen.nix-ide
       ];
-        };
     };
-    git = {
-      enable = true;
-      config = {
-        init.defaultBranch = "main";
-        user = {
-          name = "Sinsry";
-          email = "Sinsry@users.noreply.github.com";
-          commit.template = pkgs.writeText "commit-template" ''
-      Update 
-    '';
-        };
-        credential.helper = "cache --timeout=604800";
-      };
-    };
-    ssh = {
-      startAgent = true;
-      enableAskPassword = true;
-      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    };
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc.lib
-        zlib
-        openssl
-      ];
-    };
-    dconf.enable = true;
-    bash = {
-      completion.enable = true;
-      interactiveShellInit = ''
-        fastfetch
-      '';
-    };
-    virt-manager.enable = true;
   };
+  git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+      user = {
+        name = "Sinsry";
+        email = "Sinsry@users.noreply.github.com";
+        commit.template = pkgs.writeText "commit-template" ''
+          Update 
+        '';
+      };
+      credential.helper = "cache --timeout=604800";
+    };
+  };
+  ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+    askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+  };
+  nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      openssl
+    ];
+  };
+  dconf.enable = true;
+  bash = {
+    completion.enable = true;
+    interactiveShellInit = ''
+      fastfetch
+    '';
+  };
+  virt-manager.enable = true;
 
   #==== Utilisateurs ====
   users.users.sinsry = {
