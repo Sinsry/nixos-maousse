@@ -97,14 +97,25 @@
       wantedBy = [ "nixos-upgrade.service" ];
       path = with pkgs; [ coreutils libnotify ];
       script = ''
-        CURRENT_GEN=$(readlink /run/current-system)
-        LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
-
-        if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-          ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-            "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=normal --expire-time=-1 --category=system 
-        fi
-      '';
+  CURRENT_GEN=$(readlink -f /run/current-system)
+  LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
+  LOCK_FILE="/var/lib/nixos-upgrade-notification/notified"
+  
+  if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
+    mkdir -p /var/lib/nixos-upgrade-notification
+    
+    # Vérifier si on a déjà notifié pour cette génération
+    if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
+      notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
+      
+      # Enregistrer qu'on a notifié pour cette génération
+      echo "$LATEST_GEN" > "$LOCK_FILE"
+    fi
+  else
+    # Si les générations sont identiques (après redémarrage), supprimer le lock
+    rm -f "$LOCK_FILE"
+  fi
+'';
       serviceConfig = {
         Type = "oneshot";
         User = "sinsry";
@@ -388,7 +399,7 @@
       enable = true;
       allowReboot = false;
       flake = "/etc/nixos#maousse";
-      dates = "minutely";
+      dates = "hourly";
     };
     stateVersion = "25.11";
   };
