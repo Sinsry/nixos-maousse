@@ -102,11 +102,7 @@
 
         if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
           ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-            "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." \
-            --icon=system-software-update \
-            --urgency=normal
-            --expire-time=-1
-            --category=system
+            "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=normal --expire-time=-1 --category=system 
         fi
       '';
       serviceConfig = {
@@ -392,7 +388,7 @@
       enable = true;
       allowReboot = false;
       flake = "/etc/nixos#maousse";
-      dates = "hourly";
+      dates = "minutely";
     };
     stateVersion = "25.11";
   };
