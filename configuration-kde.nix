@@ -264,6 +264,9 @@
         user = {
           name = "Sinsry";
           email = "Sinsry@users.noreply.github.com";
+          commit.template = pkgs.writeText "commit-template" ''
+      Update 
+    '';
         };
         credential.helper = "cache --timeout=604800";
       };
