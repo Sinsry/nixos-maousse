@@ -95,6 +95,7 @@
       description = "Mise à jour NixOS";
       after = [ "nixos-upgrade.service" ];
       wantedBy = [ "nixos-upgrade.service" ];
+      path = with pkgs; [ coreutils libnotify ];
       script = ''
         CURRENT_GEN=$(readlink /run/current-system)
         LATEST_GEN=$(readlink /nix/var/nix/profiles/system)
