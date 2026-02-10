@@ -92,7 +92,7 @@
     samba-nmbd.wantedBy = lib.mkForce [ ];
     samba-winbindd.wantedBy = lib.mkForce [ ];
     nixos-upgrade-notification = {
-      description = "Notification de mise à jour NixOS intelligente";
+      description = "Mise à jour NixOS";
       after = [ "nixos-upgrade.service" ];
       wantedBy = [ "nixos-upgrade.service" ];
       script = ''
@@ -101,9 +101,11 @@
 
         if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
           ${pkgs.libnotify}/bin/notify-send "NixOS : Mise à jour prête" \
-            "Mise à jour effectuée." \
+            "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." \
             --icon=system-software-update \
             --urgency=normal
+            --expire-time=-1
+            --category=system
         fi
       '';
       serviceConfig = {
@@ -388,7 +390,8 @@
     autoUpgrade = {
       enable = true;
       allowReboot = false;
-      dates = "22:00";
+      flake = "/etc/nixos#maousse";
+      dates = "hourly";
     };
     stateVersion = "25.11";
   };
