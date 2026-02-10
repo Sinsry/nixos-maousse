@@ -104,15 +104,15 @@
   if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
     mkdir -p /var/lib/nixos-upgrade-notification
     
-    # Vérifier si on a déjà notifié pour cette génération
+    
     if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
       notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
       
-      # Enregistrer qu'on a notifié pour cette génération
+      
       echo "$LATEST_GEN" > "$LOCK_FILE"
     fi
   else
-    # Si les générations sont identiques (après redémarrage), supprimer le lock
+    
     rm -f "$LOCK_FILE"
   fi
 '';
