@@ -256,7 +256,7 @@
         jnoortheen.nix-ide
       ];
     };
-  };
+  
   git = {
     enable = true;
     config = {
