@@ -255,15 +255,7 @@
         anthropic.claude-code
         jnoortheen.nix-ide
       ];
-      userSettings = {
-    "nix.enableLanguageServer" = true;
-    "nix.serverPath" = "nixd";
-    "[nix]" = {
-      "editor.defaultFormatter" = "jnoortheen.nix-ide";
-      "editor.formatOnSave" = true;
-      "editor.tabSize" = 2;
-    };
-  };
+        };
     };
     git = {
       enable = true;
