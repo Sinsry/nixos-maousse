@@ -95,27 +95,24 @@
       description = "Mise à jour NixOS";
       after = [ "nixos-upgrade.service" ];
       wantedBy = [ "nixos-upgrade.service" ];
-      path = with pkgs; [ coreutils libnotify ];
+      path = with pkgs; [
+        coreutils
+        libnotify
+      ];
       script = ''
-  CURRENT_GEN=$(readlink -f /run/current-system)
-  LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
-  LOCK_FILE="/var/lib/nixos-upgrade-notification/notified"
-  
-  if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-    mkdir -p /var/lib/nixos-upgrade-notification
-    
-    
-    if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
-      notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
-      
-      
-      echo "$LATEST_GEN" > "$LOCK_FILE"
-    fi
-  else
-    
-    rm -f "$LOCK_FILE"
-  fi
-'';
+        CURRENT_GEN=$(readlink -f /run/current-system)
+        LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
+        LOCK_FILE="/var/lib/nixos-upgrade-notification/notified"
+        if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
+          mkdir -p /var/lib/nixos-upgrade-notification
+          if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
+            notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
+            echo "$LATEST_GEN" > "$LOCK_FILE"
+          fi
+        else
+          rm -f "$LOCK_FILE"
+        fi
+      '';
       serviceConfig = {
         Type = "oneshot";
         User = "sinsry";
@@ -202,9 +199,9 @@
   };
   virtualisation.libvirtd = {
     enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
+    qemu = {
+      swtpm.enable = true;
+    };
     qemu.vhostUserPackages = with pkgs; [
       virtiofsd
     ];
@@ -367,7 +364,7 @@
     #   ];
 
     sessionVariables = {
-      GDK_BACKEND= "x11";
+      GDK_BACKEND = "x11";
       GTK_THEME = "Breeze-Dark";
       SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
       SSH_ASKPASS_REQUIRE = "prefer";
