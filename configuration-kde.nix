@@ -102,9 +102,9 @@
       script = ''
         CURRENT_GEN=$(readlink -f /run/current-system)
         LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
-        LOCK_FILE="/var/lib/nixos-upgrade-notification/notified"
+        LOCK_FILE="/tmp/nixos-upgrade-notification/notified"
         if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-          mkdir -p /var/lib/nixos-upgrade-notification
+          mkdir -p /tmp/nixos-upgrade-notification
           if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
             notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
             echo "$LATEST_GEN" > "$LOCK_FILE"
@@ -255,6 +255,15 @@
         anthropic.claude-code
         jnoortheen.nix-ide
       ];
+      userSettings = {
+    "nix.enableLanguageServer" = true;
+    "nix.serverPath" = "nixd";
+    "[nix]" = {
+      "editor.defaultFormatter" = "jnoortheen.nix-ide";
+      "editor.formatOnSave" = true;
+      "editor.tabSize" = 2;
+    };
+  };
     };
     git = {
       enable = true;
