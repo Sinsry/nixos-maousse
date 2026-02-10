@@ -353,9 +353,9 @@
       rar
       rsync
       vlc
+      virt-v2v
       vorta
       vulkan-tools
-      virt-v2v
       wowup-cf
       (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
         [General]
