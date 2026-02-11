@@ -13,19 +13,19 @@
   nixpkgs.overlays = [
     (self: super: {
       mesa = super.mesa.overrideAttrs (oldAttrs: rec {
-        version = "26.0.0-rc3";
+        version = "26.0.0";
         src = super.fetchurl {
           urls = [
             "https://archive.mesa3d.org/mesa-${version}.tar.xz"
             "https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
           ];
           ## calcul du hash : nix-prefetch-url https://archive.mesa3d.org/mesa-${version}.tar.xz
-          sha256 = "1mjhmsb2l52q6gzl2q5q89iiwirh0i6hzl5hvb7gy9dmkfqhy0f0";
+          sha256 = "0wizyf2amz589cv3anz27rq69zvyxk8f4gb3ckn6rhymcj7fji1a";
         };
         ##== retrait d'un patch
-        patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
-          oldAttrs.patches or [ ]
-        );
+        #patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
+        #  oldAttrs.patches or [ ]
+        #);
         ##== retrait d'un patch
       });
     })
@@ -356,6 +356,7 @@
       virt-v2v
       vorta
       vulkan-tools
+      unzip
       wowup-cf
       (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
         [General]
