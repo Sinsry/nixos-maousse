@@ -396,6 +396,7 @@
       nixpush = "cd /etc/nixos && sudo git add . && (sudo git commit -m 'Update' || true ) && sudo git push && cd ~/";
       nixlistenv = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       nixgarbage = "sudo nix-collect-garbage -d && sudo nixos-rebuild boot";
+      nixcheck = "git ls-remote https://github.com/NixOS/nixpkgs nixos-unstable | cut -c1-7 && nix flake metadata --json path:/etc/nixos | jq -r .locks.nodes.nixpkgs.locked.rev | cut -c1-7";
     };
     etc = {
       "libinput/local-overrides.quirks".source = ./asset/local-overrides.quirks;
