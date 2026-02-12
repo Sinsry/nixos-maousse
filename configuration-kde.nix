@@ -218,6 +218,9 @@
         };
       };
     };
+    partition-manager = {
+      enable = true;
+    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -333,7 +336,6 @@
       kdePackages.filelight
       kdePackages.kate
       kdePackages.ksshaskpass
-      kdePackages.partitionmanager
       kdePackages.plasma-browser-integration
       kdePackages.qtwebengine
       libnotify
