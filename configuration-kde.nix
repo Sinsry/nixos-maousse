@@ -10,26 +10,26 @@
     ./disks-mounts.nix
   ];
   #==== Overlay Mesa (temporaire) ====
-  nixpkgs.overlays = [
-    (self: super: {
-      mesa = super.mesa.overrideAttrs (oldAttrs: rec {
-        version = "26.0.0";
-        src = super.fetchurl {
-          urls = [
-            "https://archive.mesa3d.org/mesa-${version}.tar.xz"
-            "https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
-          ];
-          ## calcul du hash : nix-prefetch-url https://archive.mesa3d.org/mesa-${version}.tar.xz
-          sha256 = "0wizyf2amz589cv3anz27rq69zvyxk8f4gb3ckn6rhymcj7fji1a";
-        };
-        ##== retrait d'un patch
-        #patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
-        #  oldAttrs.patches or [ ]
-        #);
-        ##== retrait d'un patch
-      });
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     mesa = super.mesa.overrideAttrs (oldAttrs: rec {
+  #       version = "26.0.0";
+  #       src = super.fetchurl {
+  #         urls = [
+  #           "https://archive.mesa3d.org/mesa-${version}.tar.xz"
+  #           "https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
+  #         ];
+  #         ## calcul du hash : nix-prefetch-url https://archive.mesa3d.org/mesa-${version}.tar.xz
+  #         sha256 = "0wizyf2amz589cv3anz27rq69zvyxk8f4gb3ckn6rhymcj7fji1a";
+  #       };
+  #       ##== retrait d'un patch
+  #       #patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
+  #       #  oldAttrs.patches or [ ]
+  #       #);
+  #       ##== retrait d'un patch
+  #     });
+  #   })
+  # ];
 
   #==== Boot ====
   boot = {
@@ -72,10 +72,10 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     #kernelPackages = pkgs.linuxPackages_lqx;
     #kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    kernelPackages = pkgs.linuxPackages_testing;
+    #kernelPackages = pkgs.linuxPackages_testing;
   };
 
   #==== Réseau ====
@@ -360,6 +360,16 @@
       vulkan-tools
       unzip
       wowup-cf
+      #====== pour SVW
+      # gst_all_1.gstreamer
+      # gst_all_1.gst-vaapi
+      # gst_all_1.gst-plugins-base
+      # gst_all_1.gst-plugins-good
+      # gst_all_1.gst-plugins-bad
+      # gst_all_1.gst-plugins-ugly
+      # gst_all_1.gst-libav
+      # qt6.qtmultimedia
+      #====== pour SVW
       (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
         [General]
         background=/etc/nixos/asset/wallpaper.png
@@ -377,6 +387,7 @@
       GTK_THEME = "Breeze-Dark";
       SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
       SSH_ASKPASS_REQUIRE = "prefer";
+      # QT_MEDIA_BACKEND = "gstreamer";
     };
     shellAliases = {
       nixrebuild = "sudo nixos-rebuild switch --flake path:/etc/nixos#maousse";
