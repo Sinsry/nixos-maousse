@@ -332,6 +332,7 @@
       ffmpeg
       google-chrome
       goverlay
+      jq
       kdePackages.breeze-gtk
       kdePackages.filelight
       kdePackages.kate
