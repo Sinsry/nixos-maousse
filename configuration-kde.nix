@@ -355,6 +355,7 @@
       psmisc
       rar
       rsync
+      stoat-desktop
       vlc
       virt-v2v
       vorta
