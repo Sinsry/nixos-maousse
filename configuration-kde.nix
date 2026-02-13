@@ -335,7 +335,6 @@
       jq
       kdePackages.breeze-gtk
       kdePackages.filelight
-      kdePackages.kate
       kdePackages.ksshaskpass
       kdePackages.plasma-browser-integration
       kdePackages.qtwebengine
@@ -381,8 +380,9 @@
         Theme=Papirus-Dark
       '')
     ];
-    #    plasma6.excludePackages = with pkgs; [
-    #   ];
+    plasma6.excludePackages = with pkgs; [
+
+    ];
 
     sessionVariables = {
       GDK_BACKEND = "x11";
