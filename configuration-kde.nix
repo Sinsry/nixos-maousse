@@ -226,7 +226,6 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
       package = pkgs.steam.override {
         extraEnv = {
           STEAM_FORCE_DESKTOPUI_SCALING = "1";
