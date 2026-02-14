@@ -196,6 +196,13 @@
     desktopManager.plasma6.enable = true;
     #qemuGuest.enable = true;
     spice-vdagentd.enable = true;
+
+    libinput = {
+      enable = true;
+      mouse = {
+        accelProfile = "flat";
+      };
+    };
   };
   virtualisation.libvirtd = {
     enable = true;
