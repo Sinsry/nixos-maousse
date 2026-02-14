@@ -54,7 +54,7 @@
     # Paramètres du noyau
     kernelParams = [
       "video=2160x1440@165" # Force la résolution et le taux de rafraîchissement
-      #  "quiet" # Réduit les messages du noyau
+      "quiet" # Réduit les messages du noyau
       "splash" # Active l'écran de démarrage graphique
       "boot.shell_on_fail" # Ouvre un shell en cas d'échec du boot (utile pour le dépannage)
       "amdgpu.dcverbose=0" # Réduit la verbosité du pilote AMD Display Core
@@ -502,7 +502,6 @@
     sessionVariables = {
       GDK_BACKEND = "x11"; # Force GTK à utiliser X11 (certaines apps Wayland ont des bugs)
       GTK_THEME = "Breeze-Dark"; # Thème GTK sombre
-      #  SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass"; # Dialogue SSH
       SSH_ASKPASS_REQUIRE = "prefer"; # Préfère le dialogue graphique
       # QT_MEDIA_BACKEND = "gstreamer"; # Force GStreamer pour Qt (si décommenté)
     };
