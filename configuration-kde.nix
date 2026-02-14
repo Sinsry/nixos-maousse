@@ -250,16 +250,16 @@
         };
       };
     };
-     vscode = {
-       enable = true;
-       extensions = with pkgs.vscode-extensions; [
-         ms-ceintl.vscode-language-pack-fr
-         anthropic.claude-code
-         jnoortheen.nix-ide
-         ms-vscode-remote.remote-ssh
-         ms-vscode-remote.remote-ssh-edit
-       ];
-     };
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        ms-ceintl.vscode-language-pack-fr
+        anthropic.claude-code
+        jnoortheen.nix-ide
+        ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-ssh-edit
+      ];
+    };
 
     git = {
       enable = true;
@@ -354,6 +354,7 @@
       protonvpn-gui
       psmisc
       rar
+      virt-viewer
       rsync
       stoat-desktop
       vlc
