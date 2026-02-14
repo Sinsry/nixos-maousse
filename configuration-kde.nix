@@ -194,7 +194,7 @@
     rpcbind.enable = true;
     gvfs.enable = true;
     desktopManager.plasma6.enable = true;
-    qemuGuest.enable = true;
+    #qemuGuest.enable = true;
     spice-vdagentd.enable = true;
   };
   virtualisation.libvirtd = {
@@ -256,6 +256,8 @@
         ms-ceintl.vscode-language-pack-fr
         anthropic.claude-code
         jnoortheen.nix-ide
+        ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-ssh-edit
       ];
     };
 
@@ -379,9 +381,9 @@
         Theme=Papirus-Dark
       '')
     ];
-    plasma6.excludePackages = with pkgs; [
+    # plasma6.excludePackages = with pkgs; [
 
-    ];
+    # ];
 
     sessionVariables = {
       GDK_BACKEND = "x11";
