@@ -355,7 +355,6 @@
       rar
       virt-viewer
       rsync
-      stoat-desktop
       vlc
       virt-v2v
       vorta
