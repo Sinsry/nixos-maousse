@@ -345,7 +345,6 @@
       meld
       mpv
       nfs-utils
-      nil
       nixd
       nixfmt
       nvd
