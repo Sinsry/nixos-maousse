@@ -261,11 +261,6 @@
     gvfs.enable = true; # Support des systèmes de fichiers virtuels (montage automatique)
     desktopManager.plasma6.enable = true; # Active KDE Plasma 6
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-    };
-
     #qemuGuest.enable = true; # À activer si NixOS est dans une VM QEMU
     spice-vdagentd.enable = true; # Agent SPICE pour VMs (copier-coller, résolution dynamique)
 
@@ -276,6 +271,11 @@
         accelProfile = "flat"; # Désactive l'accélération souris (important pour gaming)
       };
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
   };
 
   # Virtualisation KVM/QEMU avec libvirt
