@@ -273,11 +273,6 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-  };
-
   # Virtualisation KVM/QEMU avec libvirt
   virtualisation.libvirtd = {
     enable = true;
