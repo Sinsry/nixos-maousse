@@ -12,29 +12,29 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# 1. Sauvegarde le hardware-configuration.nix généré par l'installeur
-echo "Sauvegarde du hardware-configuration.nix..."
+echo "1. Sauvegarde le hardware-configuration.nix généré par l'installeur"
+echo ""
 sudo cp /etc/nixos/hardware-configuration.nix /tmp/hardware-configuration.nix.backup
 
-# 2. Sauvegarde complète (au cas où)
-echo "Sauvegarde de la config générée..."
+echo "2. Sauvegarde complète (au cas où)"
+echo ""
 sudo cp -r /etc/nixos /etc/nixos.backup
 
-# 3. Vide le contenu de /etc/nixos
-echo "Suppression de la config générée..."
+echo "3. Vide le contenu de /etc/nixos"
+echo ""
 sudo rm -rf /etc/nixos/*
 sudo rm -rf /etc/nixos/.git* 2>/dev/null || true
 
-# 4. Clone ta vraie config
-echo "Clonage de ta configuration depuis GitHub..."
-sudo git clone https://github.com/Sinsry/nixos-maousse /etc/nixos
+echo "4. Clone ta vraie config"
+echo ""
+sudo cp -Rf . /etc/nixos
+#sudo git clone https://github.com/Sinsry/nixos-maousse /etc/nixos
 
-# 5. Restaure le hardware-configuration.nix de cette machine
-echo "Restauration du hardware-configuration.nix de cette machine..."
+echo "5. Restaure le hardware-configuration.nix de cette machine"
+echo ""
 sudo cp /tmp/hardware-configuration.nix.backup /etc/nixos/hardware-configuration.nix
 
-# 6. Configure SSH
-echo "Configure SSH $USER, attention au MDP !!"
+echo "6. Configure SSH"
 echo ""
 openssl enc -aes-256-cbc -pbkdf2 -d -in /etc/nixos/asset/ssh-keys.enc -out /home/$USER/ssh-backup.tar.gz
 sudo chown $USER:users /home/$USER/ssh-backup.tar.gz
@@ -44,7 +44,7 @@ sudo chown -R $USER:users /home/$USER/.ssh
 sudo chmod 600 /home/$USER/.ssh/id_ed25519
 sudo chmod 644 /home/$USER/.ssh/id_ed25519.pub
 
-# 7. Copie SSH pour root
+echo "7. Copie SSH pour root"
 echo ""
 echo "Configuration SSH pour root..."
 sudo mkdir -p /root/.ssh
@@ -52,17 +52,17 @@ sudo cp /home/$USER/.ssh/id_ed25519* /root/.ssh/
 sudo chmod 600 /root/.ssh/id_ed25519
 sudo chmod 644 /root/.ssh/id_ed25519.pub
 
-# 8. Change vers SSH
+echo "8. Change vers SSH"
+echo ""
 cd /etc/nixos
 sudo git remote set-url origin git@github.com:Sinsry/nixos-maousse.git
 
-# 9. Rebuild avec ta vraie config
+echo "9. Rebuild avec ta vraie config"
 echo ""
-echo "Rebuild du système avec ta configuration..."
 sudo nixos-rebuild switch --flake path:/etc/nixos#maousse
 
-# 10. Finalisation des droits et sécurité Git
-echo "Configuration des droits pour l'utilisateur sinsry..."
+echo "10. Finalisation des droits et sécurité Git"
+echo ""
 # On donne la propriété du dossier à ton utilisateur (groupe 'users' par défaut sur NixOS)
 sudo chown -R $USER:users /etc/nixos
 # On autorise Git à travailler dans ce dossier pour éviter l'erreur 'dubious ownership'

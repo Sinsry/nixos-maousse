@@ -183,6 +183,7 @@
       LC_PAPER = "fr_FR.UTF-8"; # Taille de papier (A4)
       LC_TELEPHONE = "fr_FR.UTF-8"; # Format téléphone
       LC_TIME = "fr_FR.UTF-8"; # Format date/heure
+      LC_ALL = "";
     };
   };
 
