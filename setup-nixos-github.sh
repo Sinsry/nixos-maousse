@@ -42,7 +42,7 @@ mkdir -p /home/$USER/.ssh
 tar xzf /home/$USER/ssh-backup.tar.gz -C /home/$USER/
 sudo chown -R $USER:users /home/$USER/.ssh
 sudo chmod 600 /home/$USER/.ssh/id_ed25519
-sudo chmod 644 home/$USER/.ssh/id_ed25519.pub
+sudo chmod 644 /home/$USER/.ssh/id_ed25519.pub
 
 # 7. Copie SSH pour root
 echo ""
