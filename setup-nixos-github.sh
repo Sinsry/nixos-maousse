@@ -36,9 +36,9 @@ sudo cp /tmp/hardware-configuration.nix.backup /etc/nixos/hardware-configuration
 # 6. Configure SSH
 echo "Configure SSH $USER, attention au MDP !!"
 echo ""
-sudo mkdir -p /home/$USER/.ssh
-sudo cp /etc/nixos/asset/ssh-keys.enc /home/$USER/
-openssl enc -aes-256-cbc -pbkdf2 -d -in /home/$USER/ssh-keys.enc -out /home/$USER/ssh-backup.tar.gz
+openssl enc -aes-256-cbc -pbkdf2 -d -in /etc/nixos/asset/ssh-keys.enc -out /home/$USER/ssh-backup.tar.gz
+sudo chown $USER:users ssh-backup.tar.gz
+mkdir -p /home/$USER/.ssh
 tar xzf ssh-backup.tar.gz -C /home/$USER/
 sudo chown -R $USER:users .ssh
 sudo chmod 600 /home/$USER/.ssh/id_ed25519
