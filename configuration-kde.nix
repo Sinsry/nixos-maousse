@@ -370,6 +370,9 @@
         commit.template = pkgs.writeText "commit-template" ''
           Update 
         '';
+        safe = {
+          directory = "/etc/nixos";
+        };
       };
     };
 
