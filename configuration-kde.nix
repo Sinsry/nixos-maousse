@@ -461,7 +461,7 @@
       nixd # Serveur de langage Nix (LSP)
       nixfmt # Formateur de code Nix
       nvd # Compare les générations NixOS
-      openssl # Outil de chiffrement/déchiffrement -
+      openssl # Outil de chiffrement/déchiffrement
       papirus-icon-theme # Thème d'icônes Papirus
       pciutils # Outils PCI (lspci)
       protonvpn-gui # Interface VPN ProtonVPN
