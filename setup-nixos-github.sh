@@ -40,7 +40,7 @@ openssl enc -aes-256-cbc -pbkdf2 -d -in /etc/nixos/asset/ssh-keys.enc -out /home
 sudo chown $USER:users /home/$USER/ssh-backup.tar.gz
 mkdir -p /home/$USER/.ssh
 tar xzf /home/$USER/ssh-backup.tar.gz -C /home/$USER/
-sudo chown -R $USER:users .ssh
+sudo chown -R $USER:users /home/$USER/.ssh
 sudo chmod 600 /home/$USER/.ssh/id_ed25519
 sudo chmod 644 home/$USER/.ssh/id_ed25519.pub
 
