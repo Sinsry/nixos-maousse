@@ -16,7 +16,7 @@
     ./disks-mounts.nix # Configuration des disques et partitions
   ];
 
-  #==== Overlay Mesa (temporaire) ====
+  # ==== Overlay Mesa (temporaire) ====
   # Exemple d'overlay pour utiliser une version spécifique de Mesa
   # Utile pour tester de nouvelles versions ou corriger des bugs graphiques
   # nixpkgs.overlays = [
@@ -30,6 +30,7 @@
   #         ];
   #         ## Calcul du hash : nix-prefetch-url https://archive.mesa3d.org/mesa-${version}.tar.xz
   #         sha256 = "0wizyf2amz589cv3anz27rq69zvyxk8f4gb3ckn6rhymcj7fji1a";
+  #         sha256 = "0000000000000000000000000000000000000000000000000000";
   #       };
   #       ##== Exemple : retrait d'un patch problématique
   #       #patches = builtins.filter (p: !(builtins.match ".*musl.patch" (toString p) != null)) (
