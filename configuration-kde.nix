@@ -278,6 +278,8 @@
   # Virtualisation KVM/QEMU avec libvirt
   virtualisation.libvirtd = {
     enable = true;
+    onBoot = "ignore"; # Ne démarre pas les VMs au boot
+    onShutdown = "shutdown";
     qemu = {
       swtpm.enable = true; # TPM virtuel (nécessaire pour Windows 11)
     };
@@ -459,6 +461,7 @@
       nixd # Serveur de langage Nix (LSP)
       nixfmt # Formateur de code Nix
       nvd # Compare les générations NixOS
+      openssl # Outil de chiffrement/déchiffrement
       papirus-icon-theme # Thème d'icônes Papirus
       pciutils # Outils PCI (lspci)
       protonvpn-gui # Interface VPN ProtonVPN
