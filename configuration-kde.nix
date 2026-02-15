@@ -124,46 +124,43 @@
     samba-winbindd.wantedBy = lib.mkForce [ ]; # Service d'authentification Windows
 
     # Service de notification après une mise à jour automatique
+    # Notification pour TOUS les users connectés après la mise à jour auto
     nixos-upgrade-notification = {
-      description = "Mise à jour NixOS";
-      after = [ "nixos-upgrade.service" ]; # S'exécute après la mise à jour
-      wantedBy = [ "nixos-upgrade.service" ]; # Déclenché par le service de mise à jour
+      description = "Notification de mise à jour NixOS";
+      after = [ "nixos-upgrade.service" ];
+      wantedBy = [ "nixos-upgrade.service" ];
 
-      # Outils nécessaires au script
       path = with pkgs; [
-        coreutils # Utilitaires de base (readlink, mkdir, cat, etc.)
-        libnotify # Pour envoyer des notifications (notify-send)
+        coreutils
+        libnotify
+        systemd
+        sudo
       ];
 
-      # Script qui vérifie si une nouvelle génération est disponible
       script = ''
         CURRENT_GEN=$(readlink -f /run/current-system)
         LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
-        LOCK_FILE="/tmp/nixos-upgrade-notification/notified"
 
-        # Si la génération actuelle diffère de la dernière générée
         if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-          mkdir -p /tmp/nixos-upgrade-notification
-          
-          # Vérifie si on a déjà notifié pour cette génération
-          if [ ! -f "$LOCK_FILE" ] || [ "$(cat "$LOCK_FILE" 2>/dev/null)" != "$LATEST_GEN" ]; then
-            # Envoie une notification persistante
-            notify-send "NixOS : Mise à jour prête" "Mise à jour effectuée. Redémarrage recommandé pour appliquer les changements." --icon=system-software-update --urgency=critical --expire-time=0 --category=system
-            echo "$LATEST_GEN" > "$LOCK_FILE"
-          fi
-        else
-          # Nettoie le fichier de verrouillage si les générations sont identiques
-          rm -f "$LOCK_FILE"
+          # Notifie tous les utilisateurs connectés
+          for user_id in $(loginctl list-users --no-legend | awk '{print $1}'); do
+            user_name=$(loginctl show-user "$user_id" -p Name --value)
+            runtime_dir="/run/user/$user_id"
+            
+            # Vérifier que le runtime dir existe (= user vraiment connecté)
+            if [ -d "$runtime_dir" ]; then
+              sudo -u "$user_name" \
+                DBUS_SESSION_BUS_ADDRESS="unix:path=$runtime_dir/bus" \
+                notify-send "NixOS : Mise à jour prête" \
+                  "Redémarrage recommandé pour appliquer les changements." \
+                  --icon=system-software-update \
+                  --urgency=normal
+            fi
+          done
         fi
       '';
-
       serviceConfig = {
-        Type = "oneshot"; # Service qui s'exécute une fois
-        User = "sinsry"; # Utilisateur qui reçoit la notification
-        Environment = [
-          "DISPLAY=:0" # Affichage X11
-          "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus" # Bus D-Bus pour les notifications
-        ];
+        Type = "oneshot";
       };
     };
   };
