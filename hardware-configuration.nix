@@ -2,37 +2,42 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  #config,
+  config,
   lib,
-  #pkgs,
   modulesPath,
   ...
 }:
 
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot.initrd.availableKernelModules = [
-    "ata_piix"
     "xhci_pci"
     "ahci"
-    "virtio_pci"
-    "sr_mod"
-    "virtio_blk"
+    "nvme"
+    "usbhid"
+    "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/a39be7c4-82ea-40bb-af31-0ea35f09595d";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/c9d53a6a-4317-42c1-88ee-35bde372affc";
+    fsType = "btrfs";
+    options = [ "subvol=@" ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/c9d53a6a-4317-42c1-88ee-35bde372affc";
+    fsType = "btrfs";
+    options = [ "subvol=@home" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/8743-EB3E";
+    device = "/dev/disk/by-uuid/3B1A-C734";
     fsType = "vfat";
     options = [
       "fmask=0077"
@@ -43,4 +48,5 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
