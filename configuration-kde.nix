@@ -157,7 +157,8 @@
                 notify-send "NixOS : Mise à jour prête" \
                   "Redémarrage recommandé pour appliquer les changements." \
                   --icon=system-software-update \
-                  --urgency=normal
+                  --urgency=normal \
+                  --hint=string:desktop-entry:systemsettings
             fi
           done
         fi
