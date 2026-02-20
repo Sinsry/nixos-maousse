@@ -125,6 +125,12 @@
 
     # Service de notification après une mise à jour automatique
     # Notification pour TOUS les users connectés après la mise à jour auto
+    nixos-upgrade = {
+      serviceConfig = {
+        ExecStartPre = "${pkgs.bash}/bin/bash -c 'readlink -f /run/current-system > /run/nixos-pre-upgrade-gen'";
+      };
+    };
+
     nixos-upgrade-notification = {
       description = "Notification de mise à jour NixOS";
       after = [ "nixos-upgrade.service" ];
@@ -135,19 +141,16 @@
         libnotify
         systemd
         sudo
+        gawk
       ];
 
       script = ''
+        PRE_GEN=$(cat /run/nixos-pre-upgrade-gen 2>/dev/null || echo "")
         CURRENT_GEN=$(readlink -f /run/current-system)
-        LATEST_GEN=$(readlink -f /nix/var/nix/profiles/system)
-
-        if [ "$CURRENT_GEN" != "$LATEST_GEN" ]; then
-          # Notifie tous les utilisateurs connectés
+        if [ "$PRE_GEN" != "$CURRENT_GEN" ]; then
           for user_id in $(loginctl list-users --no-legend | awk '{print $1}'); do
             user_name=$(loginctl show-user "$user_id" -p Name --value)
             runtime_dir="/run/user/$user_id"
-            
-            # Vérifier que le runtime dir existe (= user vraiment connecté)
             if [ -d "$runtime_dir" ]; then
               sudo -u "$user_name" \
                 DBUS_SESSION_BUS_ADDRESS="unix:path=$runtime_dir/bus" \
@@ -564,6 +567,10 @@
       allowReboot = false; # Ne redémarre PAS automatiquement
       flake = "/etc/nixos#maousse"; # Flake à utiliser
       dates = "hourly"; # Vérifie les mises à jour toutes les heures
+      upgrade = false;
+      flags = [
+        "--commit-lock-file"
+      ];
     };
 
     # Version de NixOS utilisée lors de l'installation
