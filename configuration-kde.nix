@@ -564,7 +564,6 @@
       allowReboot = false; # Ne redémarre PAS automatiquement
       flake = "/etc/nixos#maousse"; # Flake à utiliser
       dates = "hourly"; # Vérifie les mises à jour toutes les heures
-      flags = [ "--commit-lock-file" ];
     };
 
     # Version de NixOS utilisée lors de l'installation
