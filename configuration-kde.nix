@@ -183,7 +183,6 @@
       LC_PAPER = "fr_FR.UTF-8"; # Taille de papier (A4)
       LC_TELEPHONE = "fr_FR.UTF-8"; # Format téléphone
       LC_TIME = "fr_FR.UTF-8"; # Format date/heure
-      LC_ALL = "";
     };
   };
 
@@ -565,6 +564,7 @@
       allowReboot = false; # Ne redémarre PAS automatiquement
       flake = "/etc/nixos#maousse"; # Flake à utiliser
       dates = "hourly"; # Vérifie les mises à jour toutes les heures
+      flags = [ "--commit-lock-file" ];
     };
 
     # Version de NixOS utilisée lors de l'installation
